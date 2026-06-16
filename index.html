@@ -74,9 +74,57 @@ tailwind.config = {
   .blog-card { background: #fff; border-radius: 20px; overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
   .blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,34,21,0.1); }
   @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; } * { animation: none !important; transition: none !important; } }
+
+  /* Scroll progress bar */
+  #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, #C47C2B, #E8A84A, #C47C2B); width: 0%; z-index: 9999; transition: width 0.1s linear; }
+
+  /* Product image zoom on hover */
+  .product-card .prod-img-wrap { overflow: hidden; border-radius: 12px; }
+  .product-card .prod-img-wrap > div { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+  .product-card:hover .prod-img-wrap > div { transform: scale(1.06); }
+
+  /* Shimmer button */
+  .btn-shimmer { position: relative; overflow: hidden; }
+  .btn-shimmer::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
+  .btn-shimmer:hover::after { left: 150%; }
+
+  /* Ingredient strip */
+  .ingredient-chip { display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.3s ease; }
+  .ingredient-chip:hover { transform: translateY(-4px); }
+  .ingredient-orb { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); transition: box-shadow 0.3s ease; }
+  .ingredient-chip:hover .ingredient-orb { box-shadow: 0 14px 36px rgba(0,0,0,0.2); }
+
+  /* Premium product mockup */
+  .mockup-pouch { position: relative; border-radius: 14px; overflow: hidden; }
+  .mockup-pouch::before { content: ''; position: absolute; top: 0; left: 20%; width: 18%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.14) 100%); border-radius: 0 0 4px 4px; pointer-events: none; z-index: 2; }
+  .mockup-pouch::after { content: ''; position: absolute; top: 0; right: 16%; width: 8%; height: 100%; background: rgba(0,0,0,0.12); pointer-events: none; z-index: 2; }
+
+  /* Parallax hero blobs (JS controlled) */
+  .hero-blob { transition: transform 0.1s linear; }
+
+  /* Section divider wave */
+  .wave-divider { line-height: 0; overflow: hidden; }
+
+  /* Grain texture overlay */
+  .grain-overlay { position: relative; }
+  .grain-overlay::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.45; }
+
+  /* Stagger delays extended */
+  .fade-up-delay-5 { transition-delay: 0.5s; }
+  .fade-up-delay-6 { transition-delay: 0.6s; }
+
+  /* Blog card image zoom */
+  .blog-card .blog-img { overflow: hidden; }
+  .blog-card .blog-img > div { transition: transform 0.5s ease; }
+  .blog-card:hover .blog-img > div { transform: scale(1.05); }
+
+  /* Goal card inner product lift */
+  .goal-card .goal-product { transition: transform 0.35s ease; }
+  .goal-card:hover .goal-product { transform: translateY(-6px) scale(1.04); }
 </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- TOP BAR -->
 <div class="bg-forest text-cream" style="font-family:'Raleway',sans-serif; font-size:11px; letter-spacing:0.05em;">
@@ -167,7 +215,7 @@ tailwind.config = {
         <p class="text-text-muted font-sans mb-4 max-w-md fade-up fade-up-delay-2" style="font-size:16px; line-height:1.8;">Most wellness products work — but nobody looks forward to them. TROPICAL blends premium tropical ingredients with functional formulas so your daily rituals are something you genuinely crave.</p>
         <p class="text-text-muted font-sans mb-8 max-w-md fade-up fade-up-delay-2" style="font-size:15px; line-height:1.7; font-style:italic;">Better taste. Better habits. Better you.</p>
         <div class="flex flex-col sm:flex-row gap-3 mb-10 fade-up fade-up-delay-3">
-          <a href="#goals" class="btn-primary btn-gold">Shop by Goal</a>
+          <a href="#goals" class="btn-primary btn-gold btn-shimmer">Shop by Goal</a>
           <a href="#bestsellers" class="btn-primary btn-outline">Shop Best Sellers</a>
         </div>
         <div class="flex items-center gap-3 fade-up fade-up-delay-4">
@@ -311,8 +359,8 @@ tailwind.config = {
     <div class="flex gap-5 overflow-x-auto pb-4 snap-x-scroll lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 xl:grid-cols-4" style="-webkit-overflow-scrolling:touch;">
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden relative" style="background:linear-gradient(160deg,#F5E6D3,#E8C9A0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#7B4A2D,#3D1F0A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#C47C2B,#F4A826);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">SLIM<br>COFFEE</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden relative" style="background:linear-gradient(160deg,#F5E6D3,#E8C9A0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#7B4A2D,#3D1F0A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#C47C2B,#F4A826);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">SLIM<br>COFFEE</span></div>
           <div class="absolute top-2.5 right-2.5 bg-gold text-white rounded-full px-2 py-0.5" style="font-size:9px; font-family:'Raleway',sans-serif; font-weight:700;">BEST SELLER</div>
         </div></div>
         <div class="p-4">
@@ -326,8 +374,8 @@ tailwind.config = {
       </div>
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-1">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#F5D6E8,#E8A0C0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#8B3060,#5C1A3A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#E8956D,#E8A8C0);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">BEAUTY<br>COFFEE</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#F5D6E8,#E8A0C0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#8B3060,#5C1A3A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#E8956D,#E8A8C0);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">BEAUTY<br>COFFEE</span></div>
         </div></div>
         <div class="p-4">
           <div class="pill mb-2" style="background:#FDE8F5; color:#8B3060;">Beauty · Glow</div>
@@ -340,8 +388,8 @@ tailwind.config = {
       </div>
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-2">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#D6E8D0,#A0C8A0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#3D7030,#1E4010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#6DB35A,#A0C878);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">MUSHROOM<br>MATCHA</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#D6E8D0,#A0C8A0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#3D7030,#1E4010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#6DB35A,#A0C878);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">MUSHROOM<br>MATCHA</span></div>
         </div></div>
         <div class="p-4">
           <div class="pill mb-2" style="background:#E8F5E0; color:#2D5A3D;">Focus · Energy</div>
@@ -354,8 +402,8 @@ tailwind.config = {
       </div>
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-3">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#D0E8F5,#90C0E0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#1E5A7A,#0A3050); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#5AB3E8,#90D0F0);"></div><span class="text-white text-center" style="font-size:6.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">HYDRATION<br>COFFEE &amp;<br>ELECTROLYTES</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#D0E8F5,#90C0E0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#1E5A7A,#0A3050); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#5AB3E8,#90D0F0);"></div><span class="text-white text-center" style="font-size:6.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">HYDRATION<br>COFFEE &amp;<br>ELECTROLYTES</span></div>
         </div></div>
         <div class="p-4">
           <div class="pill mb-2" style="background:#E0F0F8; color:#0F3347;">Hydration · Recovery</div>
@@ -368,8 +416,8 @@ tailwind.config = {
       </div>
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E0D0F0,#B090D8); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#3D2060,#20103A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#A060E0,#C090F8);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">PROTEIN<br>COFFEE</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E0D0F0,#B090D8); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#3D2060,#20103A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#A060E0,#C090F8);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">PROTEIN<br>COFFEE</span></div>
         </div></div>
         <div class="p-4">
           <div class="pill mb-2" style="background:#EEE0FC; color:#3D2060;">Recovery · Strength</div>
@@ -382,8 +430,8 @@ tailwind.config = {
       </div>
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-1">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E8F0D0,#C0D890); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#506A20,#304010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#90C840,#C8E870);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">ORGANIC<br>MORINGA</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E8F0D0,#C0D890); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#506A20,#304010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#90C840,#C8E870);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">ORGANIC<br>MORINGA</span></div>
         </div></div>
         <div class="p-4">
           <div class="pill mb-2" style="background:#F0F8D8; color:#506A20;">Slim · Vitality</div>
@@ -396,8 +444,8 @@ tailwind.config = {
       </div>
 
       <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-2">
-        <div class="p-1.5"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E8D0F5,#C090E0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="rounded-xl shadow-md" style="width:62%; height:68%; background:linear-gradient(160deg,#5A4070,#2A1840); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#A060E0,#D090F0);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">ORGANIC<br>ACAI</span></div>
+        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E8D0F5,#C090E0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
+          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#5A4070,#2A1840); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#A060E0,#D090F0);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">ORGANIC<br>ACAI</span></div>
         </div></div>
         <div class="p-4">
           <div class="pill mb-2" style="background:#F0E0FC; color:#5A4070;">Beauty · Recovery</div>
@@ -411,6 +459,72 @@ tailwind.config = {
 
     </div>
     <div class="text-center mt-10 fade-up"><a href="#" class="btn-primary btn-outline">View All Products</a></div>
+  </div>
+</section>
+
+<!-- ===================== TROPICAL INGREDIENTS ===================== -->
+<section class="py-16 overflow-hidden" style="background: linear-gradient(135deg, #1A3628 0%, #2D5A3D 40%, #1E4A30 100%);">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <div class="mb-3 fade-up" style="font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(196,124,43,0.9);">Nature's Best</div>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-cream fade-up fade-up-delay-1">Ingredients Sourced From the Tropics</h2>
+      <p class="text-cream/60 mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px; max-width:480px; margin-left:auto; margin-right:auto;">Every formula starts with ingredients that look, smell, and taste like they came straight from the source.</p>
+    </div>
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-6 fade-up fade-up-delay-2">
+      <div class="ingredient-chip">
+        <div class="ingredient-orb" style="background: linear-gradient(135deg, #5C3317, #3D1F0A);">
+          <span style="font-size:28px;">☕</span>
+        </div>
+        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Arabica<br>Coffee</span>
+      </div>
+      <div class="ingredient-chip">
+        <div class="ingredient-orb" style="background: linear-gradient(135deg, #1E4A1A, #0F2A0A);">
+          <span style="font-size:28px;">🍵</span>
+        </div>
+        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Ceremonial<br>Matcha</span>
+      </div>
+      <div class="ingredient-chip">
+        <div class="ingredient-orb" style="background: linear-gradient(135deg, #3A6020, #204010);">
+          <span style="font-size:28px;">🌿</span>
+        </div>
+        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Organic<br>Moringa</span>
+      </div>
+      <div class="ingredient-chip">
+        <div class="ingredient-orb" style="background: linear-gradient(135deg, #5A2060, #300F3A);">
+          <span style="font-size:28px;">🫐</span>
+        </div>
+        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Wild<br>Acai</span>
+      </div>
+      <div class="ingredient-chip">
+        <div class="ingredient-orb" style="background: linear-gradient(135deg, #3D6A20, #1E3A10);">
+          <span style="font-size:28px;">🍄</span>
+        </div>
+        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Lion's<br>Mane</span>
+      </div>
+      <div class="ingredient-chip">
+        <div class="ingredient-orb" style="background: linear-gradient(135deg, #0F3A50, #061E30);">
+          <span style="font-size:28px;">🌊</span>
+        </div>
+        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Ocean<br>Electrolytes</span>
+      </div>
+    </div>
+    <div class="mt-14 grid sm:grid-cols-3 gap-5 fade-up fade-up-delay-3">
+      <div class="rounded-2xl p-6 text-center" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.1); backdrop-filter:blur(8px);">
+        <div class="text-4xl mb-3">🌱</div>
+        <h4 class="text-cream font-serif font-semibold text-base mb-2">From Soil to Scoop</h4>
+        <p class="text-cream/55 font-sans text-sm leading-relaxed">Every ingredient is traceable to its origin — grown without pesticides, harvested at peak potency.</p>
+      </div>
+      <div class="rounded-2xl p-6 text-center" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.1); backdrop-filter:blur(8px);">
+        <div class="text-4xl mb-3">🔬</div>
+        <h4 class="text-cream font-serif font-semibold text-base mb-2">Bioavailable by Design</h4>
+        <p class="text-cream/55 font-sans text-sm leading-relaxed">Tropical ingredients are naturally rich in co-factors that enhance absorption. More gets in. More gets to work.</p>
+      </div>
+      <div class="rounded-2xl p-6 text-center" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.1); backdrop-filter:blur(8px);">
+        <div class="text-4xl mb-3">✨</div>
+        <h4 class="text-cream font-serif font-semibold text-base mb-2">Taste Is Not an Accident</h4>
+        <p class="text-cream/55 font-sans text-sm leading-relaxed">We chose ingredients that taste incredible on purpose — because the ritual you enjoy is the ritual you keep.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -592,15 +706,24 @@ tailwind.config = {
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
       <div class="blog-card fade-up">
-        <div style="height:200px; background:linear-gradient(135deg,#E8D0B8,#C8A878); position:relative; overflow:hidden;"><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Beauty &amp; Glow</span></div></div>
+        <div class="blog-img" style="height:200px; position:relative; overflow:hidden;"><div style="height:200px; background:linear-gradient(135deg,#E8D0B8,#C8A878); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:52px; opacity:0.35; user-select:none;">☕</div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%);"></div>
+        </div><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Beauty &amp; Glow</span></div></div>
         <div class="p-5"><h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">Why Collagen Matters For Your Skin &amp; Hair</h4><p class="text-text-muted font-sans text-sm leading-relaxed mb-4">The ingredient that changes everything — and why tropical sources absorb better.</p><a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
       </div>
       <div class="blog-card fade-up fade-up-delay-1">
-        <div style="height:200px; background:linear-gradient(135deg,#D0E8C8,#A0C878); position:relative; overflow:hidden;"><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Nutrition Science</span></div></div>
+        <div class="blog-img" style="height:200px; position:relative; overflow:hidden;"><div style="height:200px; background:linear-gradient(135deg,#D0E8C8,#A0C878); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:52px; opacity:0.35; user-select:none;">🌿</div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%);"></div>
+        </div><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Nutrition Science</span></div></div>
         <div class="p-5"><h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">The Benefits of Moringa You Need to Know</h4><p class="text-text-muted font-sans text-sm leading-relaxed mb-4">92 nutrients, 46 antioxidants. Why this tropical superfood earns its title.</p><a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
       </div>
       <div class="blog-card fade-up fade-up-delay-2">
-        <div style="height:200px; background:linear-gradient(135deg,#C8D8F0,#90B0E0); position:relative; overflow:hidden;"><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Hydration &amp; Recovery</span></div></div>
+        <div class="blog-img" style="height:200px; position:relative; overflow:hidden;"><div style="height:200px; background:linear-gradient(135deg,#C8D8F0,#90B0E0); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
+          <div style="font-size:52px; opacity:0.35; user-select:none;">💧</div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%);"></div>
+        </div><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Hydration &amp; Recovery</span></div></div>
         <div class="p-5"><h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">Electrolytes 101: Why Your Body Needs Them Daily</h4><p class="text-text-muted font-sans text-sm leading-relaxed mb-4">Most people are chronically dehydrated and don't know it. Here's how to fix that.</p><a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
       </div>
     </div>
@@ -616,7 +739,7 @@ tailwind.config = {
     <p class="text-cream/60 font-sans mb-8 fade-up fade-up-delay-2" style="font-size:15px; line-height:1.8;">Be the first to discover new products, exclusive offers, and the wellness education that makes the difference between trying and truly transforming.</p>
     <form class="flex flex-col sm:flex-row gap-3 mb-4 fade-up fade-up-delay-3" onsubmit="return false;">
       <input type="email" placeholder="Enter your email address" class="input-email flex-1" aria-label="Email address">
-      <button type="submit" class="btn-primary btn-gold flex-shrink-0">Join TROPICAL</button>
+      <button type="submit" class="btn-primary btn-gold btn-shimmer flex-shrink-0">Join TROPICAL</button>
     </form>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up fade-up-delay-4">
       <span class="flex items-center gap-1.5 text-cream/50 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No spam, ever</span>
@@ -690,14 +813,32 @@ tailwind.config = {
 </footer>
 
 <script>
+  // Fade-up scroll observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
+  // Sticky nav + scroll progress + parallax blobs
   const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, { passive: true });
+  const progressBar = document.getElementById('scroll-progress');
+  const blobs = document.querySelectorAll('.hero-blob');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    nav.classList.toggle('scrolled', scrollY > 60);
+    // Scroll progress
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (docH > 0 ? (scrollY / docH) * 100 : 0) + '%';
+    // Parallax blobs
+    if (scrollY < window.innerHeight) {
+      blobs.forEach((b, i) => {
+        const speed = i % 2 === 0 ? 0.12 : -0.08;
+        b.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    }
+  }, { passive: true });
 
+  // Mobile menu
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   const closeMenu = document.getElementById('close-menu');
@@ -706,9 +847,19 @@ tailwind.config = {
   function closeMobileMenu() { mobileMenu.classList.add('hidden'); document.body.style.overflow = ''; }
   mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobileMenu(); });
 
+  // Add to Cart micro-interaction with ripple
   document.querySelectorAll('button').forEach(btn => {
     if (btn.textContent.trim() === 'Add to Cart') {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function(e) {
+        // Ripple
+        const ripple = document.createElement('span');
+        const rect = this.getBoundingClientRect();
+        ripple.style.cssText = `position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);width:60px;height:60px;top:${e.clientY-rect.top-30}px;left:${e.clientX-rect.left-30}px;transform:scale(0);animation:ripple 0.5s ease-out forwards;pointer-events:none;`;
+        this.style.position = 'relative';
+        this.style.overflow = 'hidden';
+        this.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+        // Text change
         const orig = this.textContent;
         this.textContent = '✓ Added!';
         this.style.background = '#2D5A3D';
@@ -717,13 +868,17 @@ tailwind.config = {
     }
   });
 
+  // Animate elements already in view on load
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-up').forEach((el, i) => {
       if (el.getBoundingClientRect().top < window.innerHeight) {
-        setTimeout(() => el.classList.add('visible'), i * 70);
+        setTimeout(() => el.classList.add('visible'), i * 60);
       }
     });
   });
 </script>
+<style>
+  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+</style>
 </body>
 </html>
