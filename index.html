@@ -31,854 +31,984 @@ tailwind.config = {
 }
 </script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; }
-  body { font-family: 'Raleway', sans-serif; background-color: #FDFBF4; color: #1A2215; overflow-x: hidden; }
-  h1, h2, h3, h4 { font-family: 'Lora', serif; }
-  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .fade-up.visible { opacity: 1; transform: translateY(0); }
-  .fade-up-delay-1 { transition-delay: 0.1s; }
-  .fade-up-delay-2 { transition-delay: 0.2s; }
-  .fade-up-delay-3 { transition-delay: 0.3s; }
-  .fade-up-delay-4 { transition-delay: 0.4s; }
-  #main-nav { transition: background 0.3s ease, box-shadow 0.3s ease; }
-  #main-nav.scrolled { background: rgba(253,251,244,0.97); box-shadow: 0 2px 24px rgba(26,34,21,0.08); }
-  .nav-link { position: relative; }
-  .nav-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1.5px; background: #C47C2B; transition: width 0.3s ease; }
-  .nav-link:hover::after { width: 100%; }
-  .hero-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.22; pointer-events: none; }
-  .goal-card { position: relative; overflow: hidden; border-radius: 20px; cursor: pointer; transition: transform 0.35s ease, box-shadow 0.35s ease; }
-  .goal-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,0.22); }
-  .product-card { background: #fff; border-radius: 20px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; }
-  .product-card:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(26,34,21,0.12); }
-  .bundle-card { background: #fff; border-radius: 20px; border: 1.5px solid #EDE8DD; transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; cursor: pointer; overflow: hidden; }
-  .bundle-card:hover { border-color: #C47C2B; box-shadow: 0 16px 40px rgba(196,124,43,0.12); transform: translateY(-4px); }
-  .stars { color: #F4A826; }
-  .snap-x-scroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
-  .snap-x-scroll > * { scroll-snap-align: start; }
-  .pill { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 100px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
-  .btn-primary { display: inline-flex; align-items: center; justify-content: center; background: #2D5A3D; color: #FDFBF4; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 28px; border-radius: 100px; cursor: pointer; transition: background 0.25s, transform 0.2s, box-shadow 0.25s; border: none; text-decoration: none; }
-  .btn-primary:hover { background: #1A3628; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(45,90,61,0.28); }
-  .btn-gold { background: #C47C2B; }
-  .btn-gold:hover { background: #A86820; box-shadow: 0 8px 24px rgba(196,124,43,0.3); }
-  .btn-outline { background: transparent; border: 1.5px solid #1A2215; color: #1A2215; }
-  .btn-outline:hover { background: #1A2215; color: #FDFBF4; }
-  .btn-outline-white { background: transparent; border: 1.5px solid rgba(253,251,244,0.6); color: #FDFBF4; }
-  .btn-outline-white:hover { background: rgba(253,251,244,0.12); border-color: #FDFBF4; }
-  .btn-sm { padding: 10px 20px; font-size: 11px; }
-  .section-label { font-family: 'Raleway', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #C47C2B; }
-  .input-email { background: rgba(253,251,244,0.12); border: 1.5px solid rgba(253,251,244,0.25); color: #FDFBF4; font-family: 'Raleway', sans-serif; font-size: 14px; padding: 14px 20px; border-radius: 100px; outline: none; width: 100%; transition: border-color 0.25s; }
-  .input-email::placeholder { color: rgba(253,251,244,0.5); }
-  .input-email:focus { border-color: rgba(253,251,244,0.6); }
-  .testi-card { background: #fff; border-radius: 20px; padding: 28px; box-shadow: 0 4px 24px rgba(26,34,21,0.06); transition: transform 0.3s, box-shadow 0.3s; }
-  .testi-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(26,34,21,0.1); }
-  .blog-card { background: #fff; border-radius: 20px; overflow: hidden; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-  .blog-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(26,34,21,0.1); }
-  @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; } * { animation: none !important; transition: none !important; } }
+*,*::before,*::after{box-sizing:border-box;}
+body{font-family:'Raleway',sans-serif;background:#FDFBF4;color:#1A2215;overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Lora',serif;}
 
-  /* Scroll progress bar */
-  #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, #C47C2B, #E8A84A, #C47C2B); width: 0%; z-index: 9999; transition: width 0.1s linear; }
+/* Progress bar */
+#prog{position:fixed;top:0;left:0;height:2.5px;background:linear-gradient(90deg,#C47C2B,#E8A84A);width:0;z-index:9999;transition:width .1s linear;}
 
-  /* Product image zoom on hover */
-  .product-card .prod-img-wrap { overflow: hidden; border-radius: 12px; }
-  .product-card .prod-img-wrap > div { transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-  .product-card:hover .prod-img-wrap > div { transform: scale(1.06); }
+/* Nav */
+#main-nav{transition:background .3s,box-shadow .3s;}
+#main-nav.scrolled{background:rgba(253,251,244,.97);box-shadow:0 2px 20px rgba(0,0,0,.08);}
+.nav-link{position:relative;}
+.nav-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1.5px;background:#C47C2B;transition:width .3s;}
+.nav-link:hover::after{width:100%;}
 
-  /* Shimmer button */
-  .btn-shimmer { position: relative; overflow: hidden; }
-  .btn-shimmer::after { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
-  .btn-shimmer:hover::after { left: 150%; }
+/* Fade animations */
+.fade-up{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.fade-up.visible{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}
 
-  /* Ingredient strip */
-  .ingredient-chip { display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: transform 0.3s ease; }
-  .ingredient-chip:hover { transform: translateY(-4px); }
-  .ingredient-orb { width: 72px; height: 72px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); transition: box-shadow 0.3s ease; }
-  .ingredient-chip:hover .ingredient-orb { box-shadow: 0 14px 36px rgba(0,0,0,0.2); }
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Raleway',sans-serif;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 28px;border-radius:6px;cursor:pointer;transition:all .25s;border:none;text-decoration:none;position:relative;overflow:hidden;}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:skewX(-20deg);transition:left .5s;}
+.btn:hover::after{left:150%;}
+.btn-forest{background:#2D5A3D;color:#FDFBF4;}
+.btn-forest:hover{background:#1A3628;transform:translateY(-1px);box-shadow:0 8px 24px rgba(45,90,61,.3);}
+.btn-gold{background:#C47C2B;color:#fff;}
+.btn-gold:hover{background:#A86820;box-shadow:0 8px 24px rgba(196,124,43,.35);}
+.btn-outline{background:transparent;border:1.5px solid #1A2215;color:#1A2215;border-radius:6px;}
+.btn-outline:hover{background:#1A2215;color:#FDFBF4;}
+.btn-outline-w{background:transparent;border:1.5px solid rgba(253,251,244,.5);color:#FDFBF4;border-radius:6px;}
+.btn-outline-w:hover{background:rgba(253,251,244,.12);border-color:#FDFBF4;}
+.btn-sm{padding:10px 18px;font-size:11px;}
 
-  /* Premium product mockup */
-  .mockup-pouch { position: relative; border-radius: 14px; overflow: hidden; }
-  .mockup-pouch::before { content: ''; position: absolute; top: 0; left: 20%; width: 18%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.14) 100%); border-radius: 0 0 4px 4px; pointer-events: none; z-index: 2; }
-  .mockup-pouch::after { content: ''; position: absolute; top: 0; right: 16%; width: 8%; height: 100%; background: rgba(0,0,0,0.12); pointer-events: none; z-index: 2; }
+/* Section label */
+.label{font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#C47C2B;}
 
-  /* Parallax hero blobs (JS controlled) */
-  .hero-blob { transition: transform 0.1s linear; }
+/* Product cards */
+.prod-card{background:#fff;border-radius:12px;overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.prod-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.12);}
+.prod-card .img-wrap{overflow:hidden;}
+.prod-card .img-wrap>div{transition:transform .5s cubic-bezier(.25,.46,.45,.94);}
+.prod-card:hover .img-wrap>div{transform:scale(1.06);}
 
-  /* Section divider wave */
-  .wave-divider { line-height: 0; overflow: hidden; }
+/* Pouch mockup */
+.pouch{position:relative;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:12px;box-shadow:0 8px 32px rgba(0,0,0,.28);}
+.pouch::before{content:'';position:absolute;top:0;left:22%;width:16%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.06) 50%,rgba(255,255,255,.16));border-radius:2px;z-index:2;pointer-events:none;}
+.pouch::after{content:'';position:absolute;top:0;right:18%;width:7%;height:100%;background:rgba(0,0,0,.15);z-index:2;pointer-events:none;}
+.pouch-label{font-family:'Raleway',sans-serif;font-weight:800;font-size:7px;color:#fff;text-align:center;letter-spacing:.08em;line-height:1.3;z-index:3;position:relative;}
 
-  /* Grain texture overlay */
-  .grain-overlay { position: relative; }
-  .grain-overlay::before { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.45; }
+/* Goal cards */
+.goal-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .35s,box-shadow .35s;}
+.goal-card:hover{transform:translateY(-5px);box-shadow:0 28px 60px rgba(0,0,0,.28);}
+.goal-card .gc-inner{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:24px;}
+.goal-card .pouch-wrap{transition:transform .4s ease;}
+.goal-card:hover .pouch-wrap{transform:translateY(-8px) scale(1.05);}
 
-  /* Stagger delays extended */
-  .fade-up-delay-5 { transition-delay: 0.5s; }
-  .fade-up-delay-6 { transition-delay: 0.6s; }
+/* Trust bar */
+.trust-item{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;}
 
-  /* Blog card image zoom */
-  .blog-card .blog-img { overflow: hidden; }
-  .blog-card .blog-img > div { transition: transform 0.5s ease; }
-  .blog-card:hover .blog-img > div { transform: scale(1.05); }
+/* Benefit cards */
+.ben-card{border-radius:16px;overflow:hidden;background:#fff;transition:transform .3s,box-shadow .3s;}
+.ben-card:hover{transform:translateY(-4px);box-shadow:0 18px 48px rgba(0,0,0,.1);}
 
-  /* Goal card inner product lift */
-  .goal-card .goal-product { transition: transform 0.35s ease; }
-  .goal-card:hover .goal-product { transform: translateY(-6px) scale(1.04); }
+/* Testi */
+.testi{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 24px rgba(0,0,0,.06);transition:transform .3s;}
+.testi:hover{transform:translateY(-3px);}
+
+/* Bundle */
+.bun-card{background:#fff;border-radius:16px;border:1.5px solid #EDE8DD;overflow:hidden;transition:border-color .3s,box-shadow .3s,transform .3s;}
+.bun-card:hover{border-color:#C47C2B;box-shadow:0 16px 40px rgba(196,124,43,.12);transform:translateY(-4px);}
+
+/* Blog */
+.blog-card{background:#fff;border-radius:16px;overflow:hidden;transition:transform .3s,box-shadow .3s;cursor:pointer;}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);}
+.blog-card .bi{overflow:hidden;}
+.blog-card .bi>div{transition:transform .5s ease;}
+.blog-card:hover .bi>div{transform:scale(1.05);}
+
+/* Stars */
+.stars{color:#F4A826;}
+
+/* Snap scroll */
+.snap-x{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
+.snap-x>*{scroll-snap-align:start;}
+
+@media(prefers-reduced-motion:reduce){.fade-up{opacity:1;transform:none;}*{animation:none!important;transition:none!important;}}
+@keyframes ripple{to{transform:scale(4);opacity:0;}}
 </style>
 </head>
 <body>
-<div id="scroll-progress"></div>
+<div id="prog"></div>
 
 <!-- TOP BAR -->
-<div class="bg-forest text-cream" style="font-family:'Raleway',sans-serif; font-size:11px; letter-spacing:0.05em;">
-  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-9">
-    <span class="hidden sm:flex items-center gap-1.5">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      Free Shipping on Orders Over $200
-    </span>
-    <span class="flex items-center gap-1.5 font-semibold mx-auto sm:mx-0">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      100% Organic · Third-Party Tested
-    </span>
-    <div class="hidden sm:flex items-center gap-4" style="color:rgba(253,251,244,0.7);">
-      <span class="cursor-pointer hover:text-cream transition-colors">USD $</span>
-      <span class="cursor-pointer hover:text-cream transition-colors">Account</span>
-      <span class="cursor-pointer hover:text-cream transition-colors">Cart (0)</span>
+<div style="background:#2D5A3D;font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:.04em;">
+  <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-9 text-white/80">
+    <span class="hidden sm:flex items-center gap-1.5"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Free Shipping on Orders Over $200</span>
+    <span class="flex items-center gap-1.5 font-semibold mx-auto sm:mx-0 text-white"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>100% Premium Ingredients You Can Trust</span>
+    <div class="hidden sm:flex items-center gap-5 text-white/70">
+      <span class="cursor-pointer hover:text-white transition-colors">USD $</span>
+      <span class="cursor-pointer hover:text-white transition-colors">Account</span>
+      <span class="cursor-pointer hover:text-white transition-colors">Cart (0)</span>
     </div>
   </div>
 </div>
 
 <!-- NAV -->
-<nav id="main-nav" class="sticky top-0 z-50 bg-cream/90 backdrop-blur-md">
+<nav id="main-nav" class="sticky top-0 z-50 bg-cream/95 backdrop-blur-md">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="#" class="flex items-center gap-2.5 flex-shrink-0 cursor-pointer">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-          <circle cx="18" cy="18" r="18" fill="#2D5A3D"/>
-          <path d="M18 28 C18 28 10 22 10 16 C10 11.5 13.5 8 18 8 C22.5 8 26 11.5 26 16 C26 22 18 28 18 28Z" fill="#FDFBF4" opacity="0.9"/>
-          <path d="M18 15 L18 26" stroke="#2D5A3D" stroke-width="1.5" stroke-linecap="round"/>
-          <path d="M15 18 L18 15 L21 18" stroke="#2D5A3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+      <a href="#" class="flex items-center gap-2 cursor-pointer flex-shrink-0">
+        <svg width="34" height="34" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#2D5A3D"/><path d="M18 28C18 28 10 22 10 16c0-4.5 3.5-8 8-8s8 3.5 8 8c0 6-8 12-8 12Z" fill="#FDFBF4" opacity=".9"/><path d="M18 15v11M15 18l3-3 3 3" stroke="#2D5A3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <div>
-          <div class="font-serif text-text-dark font-semibold text-lg leading-tight tracking-wide">tropical</div>
-          <div class="text-text-muted leading-tight" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; font-family:'Raleway',sans-serif; font-weight:500;">Wellness You'll Actually Love</div>
+          <div class="font-serif font-semibold text-text-dark text-lg leading-tight tracking-wide">tropical</div>
+          <div class="text-text-muted leading-tight" style="font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;font-family:'Raleway',sans-serif;font-weight:500;">Wellness Inspired by Nature</div>
         </div>
       </a>
-      <div class="hidden lg:flex items-center gap-8">
-        <a href="#" class="nav-link text-text-dark hover:text-forest transition-colors cursor-pointer" style="font-size:13px; font-weight:500; font-family:'Raleway',sans-serif;">Shop</a>
-        <a href="#goals" class="nav-link text-text-dark hover:text-forest transition-colors cursor-pointer" style="font-size:13px; font-weight:500; font-family:'Raleway',sans-serif;">Shop by Goal</a>
-        <a href="#bestsellers" class="nav-link text-text-dark hover:text-forest transition-colors cursor-pointer" style="font-size:13px; font-weight:500; font-family:'Raleway',sans-serif;">Best Sellers</a>
-        <a href="#bundles" class="nav-link text-text-dark hover:text-forest transition-colors cursor-pointer" style="font-size:13px; font-weight:500; font-family:'Raleway',sans-serif;">Bundles</a>
-        <a href="#learn" class="nav-link text-text-dark hover:text-forest transition-colors cursor-pointer" style="font-size:13px; font-weight:500; font-family:'Raleway',sans-serif;">Learn</a>
+      <div class="hidden lg:flex items-center gap-7">
+        <a href="#" class="nav-link text-text-dark hover:text-forest text-sm font-medium transition-colors" style="font-family:'Raleway',sans-serif;">Shop</a>
+        <a href="#goals" class="nav-link text-text-dark hover:text-forest text-sm font-medium transition-colors" style="font-family:'Raleway',sans-serif;">Shop by Goal</a>
+        <a href="#bestsellers" class="nav-link text-text-dark hover:text-forest text-sm font-medium transition-colors" style="font-family:'Raleway',sans-serif;">Best Sellers</a>
+        <a href="#bundles" class="nav-link text-text-dark hover:text-forest text-sm font-medium transition-colors" style="font-family:'Raleway',sans-serif;">Bundles</a>
+        <a href="#learn" class="nav-link text-text-dark hover:text-forest text-sm font-medium transition-colors" style="font-family:'Raleway',sans-serif;">Learn</a>
       </div>
-      <div class="hidden lg:flex items-center gap-5">
-        <button class="cursor-pointer text-text-dark hover:text-forest transition-colors" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
-        <button class="cursor-pointer text-text-dark hover:text-forest transition-colors" aria-label="Account"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
-        <button class="cursor-pointer text-text-dark hover:text-forest transition-colors relative" aria-label="Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span class="absolute -top-1.5 -right-1.5 bg-gold text-white rounded-full w-4 h-4 flex items-center justify-center font-bold" style="font-size:9px;">0</span>
-        </button>
-        <a href="#" class="btn-primary btn-sm">Shop Now</a>
+      <div class="hidden lg:flex items-center gap-4">
+        <button class="text-text-dark hover:text-forest transition-colors" aria-label="Search"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></button>
+        <button class="text-text-dark hover:text-forest transition-colors" aria-label="Account"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></button>
+        <button class="text-text-dark hover:text-forest transition-colors relative" aria-label="Cart"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="absolute -top-1.5 -right-1.5 bg-gold text-white rounded-full w-4 h-4 flex items-center justify-center font-bold" style="font-size:8px;">0</span></button>
+        <a href="#bestsellers" class="btn btn-forest btn-sm">Shop Now</a>
       </div>
-      <button id="hamburger" class="lg:hidden cursor-pointer text-text-dark p-2" aria-label="Menu">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
+      <button id="hamburger" class="lg:hidden text-text-dark p-2" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     </div>
   </div>
 </nav>
 
 <!-- MOBILE MENU -->
-<div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-forest flex flex-col p-6">
+<div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-forest-dark flex flex-col p-6">
   <div class="flex justify-between items-center mb-8">
     <span class="text-cream font-serif text-xl font-semibold">tropical</span>
-    <button id="close-menu" class="text-cream cursor-pointer p-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button id="close-menu" class="text-cream p-2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>
   <div class="flex flex-col gap-6">
-    <a href="#goals" class="text-cream font-serif text-2xl" onclick="closeMobileMenu()">Shop by Goal</a>
-    <a href="#bestsellers" class="text-cream font-serif text-2xl" onclick="closeMobileMenu()">Best Sellers</a>
-    <a href="#bundles" class="text-cream font-serif text-2xl" onclick="closeMobileMenu()">Bundles</a>
-    <a href="#ritual" class="text-cream font-serif text-2xl" onclick="closeMobileMenu()">Daily Ritual</a>
-    <a href="#learn" class="text-cream font-serif text-2xl" onclick="closeMobileMenu()">Learn</a>
+    <a href="#goals" class="text-cream font-serif text-2xl" onclick="closeMM()">Shop by Goal</a>
+    <a href="#bestsellers" class="text-cream font-serif text-2xl" onclick="closeMM()">Best Sellers</a>
+    <a href="#bundles" class="text-cream font-serif text-2xl" onclick="closeMM()">Bundles</a>
+    <a href="#benefits" class="text-cream font-serif text-2xl" onclick="closeMM()">Wellness</a>
+    <a href="#learn" class="text-cream font-serif text-2xl" onclick="closeMM()">Learn</a>
   </div>
-  <div class="mt-auto"><a href="#" class="btn-primary w-full" style="display:flex; justify-content:center;">Shop Now</a></div>
+  <div class="mt-auto"><a href="#bestsellers" class="btn btn-gold w-full" style="display:flex;justify-content:center;" onclick="closeMM()">Shop Now</a></div>
 </div>
 
-<!-- ===================== HERO ===================== -->
-<section class="relative min-h-screen flex items-center overflow-hidden bg-cream pt-8 pb-20" style="min-height: calc(100vh - 72px);">
-  <div class="hero-blob w-96 h-96 bg-peach" style="top:-8%; right:4%;"></div>
-  <div class="hero-blob w-72 h-72 bg-gold-light" style="bottom:8%; left:15%;"></div>
-  <div class="hero-blob w-56 h-56 bg-forest" style="top:25%; right:32%;"></div>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-      <div class="relative z-10 order-2 lg:order-1">
-        <div class="section-label mb-6 fade-up">Functional Wellness · Tropical Ingredients</div>
-        <h1 class="font-serif font-semibold text-text-dark fade-up fade-up-delay-1" style="font-size: clamp(2.6rem, 5.5vw, 4.4rem); line-height: 1.1; margin-bottom: 0.4rem;">Health Has Never</h1>
-        <h1 class="font-serif font-semibold text-forest italic fade-up fade-up-delay-1" style="font-size: clamp(2.6rem, 5.5vw, 4.4rem); line-height: 1.1; margin-bottom: 1.5rem;">Tasted This Good.</h1>
-        <svg class="mb-6 fade-up fade-up-delay-1" width="90" height="12" viewBox="0 0 90 12"><path d="M2 9 Q22 2 45 8 Q68 14 88 6" stroke="#C47C2B" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
-        <p class="text-text-muted font-sans mb-4 max-w-md fade-up fade-up-delay-2" style="font-size:16px; line-height:1.8;">Most wellness products work — but nobody looks forward to them. TROPICAL blends premium tropical ingredients with functional formulas so your daily rituals are something you genuinely crave.</p>
-        <p class="text-text-muted font-sans mb-8 max-w-md fade-up fade-up-delay-2" style="font-size:15px; line-height:1.7; font-style:italic;">Better taste. Better habits. Better you.</p>
-        <div class="flex flex-col sm:flex-row gap-3 mb-10 fade-up fade-up-delay-3">
-          <a href="#goals" class="btn-primary btn-gold btn-shimmer">Shop by Goal</a>
-          <a href="#bestsellers" class="btn-primary btn-outline">Shop Best Sellers</a>
+<!-- ===== HERO ===== -->
+<section class="relative overflow-hidden bg-cream" style="min-height:calc(100vh - 72px);">
+  <!-- background accent -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 right-0 w-1/2 h-full" style="background:linear-gradient(135deg,#EDD8B8 0%,#D4B896 40%,#C4A07A 70%,#B8906A 100%);"></div>
+    <div class="absolute top-0 left-1/2 w-24 h-full" style="background:linear-gradient(90deg,#FDFBF4,transparent);"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center" style="min-height:calc(100vh - 72px);">
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-4 items-center w-full py-16 lg:py-0">
+
+      <!-- LEFT -->
+      <div class="relative z-10 order-2 lg:order-1 max-w-xl">
+        <div class="label mb-5 fade-up">Functional Wellness · Tropical Ingredients</div>
+        <h1 class="font-serif font-semibold text-text-dark fade-up d1" style="font-size:clamp(2.4rem,5vw,4rem);line-height:1.08;margin-bottom:.6rem;">Health Has Never</h1>
+        <h1 class="font-serif font-semibold text-forest italic fade-up d1" style="font-size:clamp(2.4rem,5vw,4rem);line-height:1.08;margin-bottom:1.4rem;">Tasted This Good.</h1>
+        <svg class="mb-6 fade-up d2" width="80" height="10" viewBox="0 0 80 10"><path d="M2 7 Q20 1 40 6 Q60 11 78 5" stroke="#C47C2B" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>
+        <p class="text-text-muted font-sans mb-8 fade-up d2" style="font-size:16px;line-height:1.8;max-width:420px;">Premium tropical wellness rituals designed for beauty, energy, focus, hydration, and balance — without sacrificing taste.</p>
+        <div class="flex flex-col sm:flex-row gap-3 mb-10 fade-up d3">
+          <a href="#goals" class="btn btn-forest">Shop by Goal</a>
+          <a href="#bestsellers" class="btn btn-outline">Shop Best Sellers</a>
         </div>
-        <div class="flex items-center gap-3 fade-up fade-up-delay-4">
+        <div class="flex items-center gap-3 fade-up d4">
           <div class="flex">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="#F4A826"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
           <span class="text-text-dark font-sans font-semibold text-sm">10,000+ Happy Customers</span>
         </div>
       </div>
+
+      <!-- RIGHT — lifestyle scene -->
       <div class="relative order-1 lg:order-2 flex justify-center lg:justify-end fade-up">
-        <div class="relative w-full max-w-lg" style="aspect-ratio:4/5;">
-          <div class="absolute inset-0 rounded-3xl overflow-hidden" style="background: linear-gradient(135deg, #EAD8BE 0%, #D4B896 30%, #C4A07A 60%, #B8906A 100%);">
-            <div class="absolute top-6 right-6 w-32 h-32 rounded-full opacity-20" style="background: radial-gradient(circle, #fff 0%, transparent 70%);"></div>
-            <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-3/4 h-4/5 opacity-25 rounded-t-full" style="background: linear-gradient(to top, #8B6340, transparent);"></div>
-            <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 w-full justify-center px-4">
-              <div class="rounded-xl flex items-end justify-center pb-2 shadow-lg" style="width:50px; height:68px; background: linear-gradient(160deg, #5C3317, #3D1F0A);"><span class="text-white text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">SLIM<br>COFFEE</span></div>
-              <div class="rounded-xl flex items-end justify-center pb-2 shadow-lg" style="width:50px; height:68px; background: linear-gradient(160deg, #5C2040, #3D0F2A);"><span class="text-white text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">BEAUTY<br>COFFEE</span></div>
-              <div class="rounded-xl flex items-end justify-center pb-2 shadow-lg" style="width:50px; height:68px; background: linear-gradient(160deg, #1E3D1A, #0F2A0A);"><span class="text-white text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">MUSHROOM<br>MATCHA</span></div>
-              <div class="rounded-xl flex items-end justify-center pb-2 shadow-lg" style="width:50px; height:68px; background: linear-gradient(160deg, #0F3347, #061E2E);"><span class="text-white text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">HYDRATION<br>COFFEE</span></div>
-              <div class="rounded-xl flex items-end justify-center pb-2 shadow-lg" style="width:50px; height:68px; background: linear-gradient(160deg, #3D3060, #20103A);"><span class="text-white text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">PROTEIN<br>COFFEE</span></div>
+        <div class="relative" style="width:100%;max-width:560px;">
+          <!-- Main lifestyle panel -->
+          <div class="relative rounded-3xl overflow-hidden" style="aspect-ratio:4/5;background:linear-gradient(155deg,#EDD8B8 0%,#D4B090 30%,#B89060 55%,#A07848 80%,#8A6038 100%);">
+
+            <!-- Soft light top-right glow -->
+            <div class="absolute top-0 right-0 w-3/4 h-2/3 rounded-full pointer-events-none" style="background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.35) 0%,transparent 65%);"></div>
+
+            <!-- Dark bottom vignette -->
+            <div class="absolute bottom-0 left-0 right-0 h-1/3 pointer-events-none" style="background:linear-gradient(to top,rgba(30,20,10,.5),transparent);"></div>
+
+            <!-- Person silhouette (woman holding drink) -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <!-- simplified lifestyle figure -->
+              <svg width="100%" height="100%" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:.18;">
+                <ellipse cx="200" cy="140" rx="55" ry="65" fill="#6B3A18"/>
+                <path d="M130 260 C130 200 160 180 200 175 C240 180 270 200 270 260 L285 460 H115 Z" fill="#6B3A18"/>
+                <path d="M170 220 C155 240 145 280 145 320 L130 420 H110 L105 280 C105 240 130 210 165 205 Z" fill="#7A4520"/>
+                <path d="M230 220 C245 240 255 280 255 320 L270 420 H290 L295 280 C295 240 270 210 235 205 Z" fill="#7A4520"/>
+              </svg>
             </div>
-            <div class="absolute top-8 left-8 w-16 h-16 rounded-full opacity-55" style="background: radial-gradient(circle at 40% 40%, #6B3E1A, #3D200A);"></div>
-            <div class="absolute top-16 right-12 w-12 h-12 rounded-full opacity-50" style="background: radial-gradient(circle at 40% 40%, #4A7A30, #2A4A18);"></div>
+
+            <!-- Lifestyle scene: tropical drink bowl at bottom left -->
+            <div class="absolute bottom-12 left-8">
+              <div class="rounded-full shadow-2xl flex items-center justify-center" style="width:80px;height:80px;background:linear-gradient(135deg,#A0C87E,#4A8A30);border:3px solid rgba(255,255,255,.3);">
+                <span style="font-size:32px;">🥤</span>
+              </div>
+            </div>
+
+            <!-- Ingredient clusters -->
+            <div class="absolute top-8 left-8 flex flex-wrap gap-2" style="max-width:100px;">
+              <span class="rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow" style="width:38px;height:38px;font-size:18px;">🥥</span>
+              <span class="rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow" style="width:38px;height:38px;font-size:18px;">☕</span>
+              <span class="rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow" style="width:38px;height:38px;font-size:18px;">🍵</span>
+              <span class="rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow" style="width:38px;height:38px;font-size:18px;">🫐</span>
+              <span class="rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow" style="width:38px;height:38px;font-size:18px;">🌿</span>
+              <span class="rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center shadow" style="width:38px;height:38px;font-size:18px;">🍄</span>
+            </div>
+
+            <!-- Product pouches row at bottom -->
+            <div class="absolute bottom-6 right-0 left-0 flex justify-center gap-2 px-4">
+              <div class="pouch flex-shrink-0" style="width:54px;height:74px;background:linear-gradient(160deg,#7B4A2D,#3D1F0A);">
+                <div class="w-5 h-5 rounded-full mb-1.5 opacity-70" style="background:linear-gradient(135deg,#C47C2B,#F4A826);z-index:3;position:relative;"></div>
+                <span class="pouch-label">SLIM<br>COFFEE</span>
+              </div>
+              <div class="pouch flex-shrink-0" style="width:54px;height:74px;background:linear-gradient(160deg,#8B3060,#5C1A3A);">
+                <div class="w-5 h-5 rounded-full mb-1.5 opacity-70" style="background:linear-gradient(135deg,#E8956D,#E8A8C0);z-index:3;position:relative;"></div>
+                <span class="pouch-label">BEAUTY<br>COFFEE</span>
+              </div>
+              <div class="pouch flex-shrink-0" style="width:54px;height:74px;background:linear-gradient(160deg,#3D7030,#1E4010);">
+                <div class="w-5 h-5 rounded-full mb-1.5 opacity-70" style="background:linear-gradient(135deg,#6DB35A,#A0C878);z-index:3;position:relative;"></div>
+                <span class="pouch-label">MUSHROOM<br>MATCHA</span>
+              </div>
+              <div class="pouch flex-shrink-0" style="width:54px;height:74px;background:linear-gradient(160deg,#1E5A7A,#0A3050);">
+                <div class="w-5 h-5 rounded-full mb-1.5 opacity-70" style="background:linear-gradient(135deg,#5AB3E8,#90D0F0);z-index:3;position:relative;"></div>
+                <span class="pouch-label">HYDRATION<br>COFFEE</span>
+              </div>
+            </div>
           </div>
-          <div class="absolute -left-5 top-12 bg-white rounded-2xl shadow-2xl p-3 flex flex-col items-center" style="width:88px;">
-            <div class="w-12 h-12 rounded-full border-2 border-forest flex items-center justify-center mb-1" style="background: #E8F2EC;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <span class="text-center text-forest font-bold" style="font-size:9px; font-family:'Raleway',sans-serif; letter-spacing:0.08em; line-height:1.3;">USDA<br>ORGANIC</span>
+
+          <!-- Floating USDA badge -->
+          <div class="absolute -left-5 top-10 bg-white rounded-full shadow-2xl flex flex-col items-center justify-center" style="width:82px;height:82px;border:2px solid #E8F2EC;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span class="text-forest font-bold text-center leading-tight mt-1" style="font-size:7.5px;font-family:'Raleway',sans-serif;letter-spacing:.06em;">USDA<br>ORGANIC</span>
           </div>
-          <div class="absolute -right-4 top-1/3 bg-white rounded-2xl shadow-2xl p-3" style="width:100px;">
-            <div class="w-8 h-8 rounded-lg mb-1.5 mx-auto" style="background: linear-gradient(135deg, #C47C2B, #E8A84A);"></div>
-            <div class="text-center text-text-dark font-semibold" style="font-size:9px; font-family:'Raleway',sans-serif; line-height:1.4;">Tropical<br>ingredients<br><span class="text-forest">you'll crave</span></div>
+
+          <!-- Floating tag -->
+          <div class="absolute -right-4 top-1/3 bg-white rounded-2xl shadow-2xl p-3" style="width:110px;">
+            <div class="w-8 h-8 rounded-lg mb-2 mx-auto" style="background:linear-gradient(135deg,#C47C2B,#E8A84A);"></div>
+            <div class="text-center text-text-dark font-semibold leading-snug" style="font-size:9px;font-family:'Raleway',sans-serif;">Made with USDA Organic ingredients<br><span class="text-forest">you can trust</span></div>
           </div>
         </div>
       </div>
+
     </div>
   </div>
-  <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none">
-    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:60px; width:100%;"><path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#FAF8F2" opacity="0.5"/></svg>
-  </div>
 </section>
 
-<!-- BRAND STATEMENT -->
-<section class="py-16" style="background:#FAF8F2;">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-    <p class="font-serif italic text-text-dark fade-up" style="font-size: clamp(1.2rem, 2.4vw, 1.8rem); line-height: 1.7;">"Most wellness products focus only on function and forget the experience. TROPICAL makes healthy routines <span class="text-forest font-semibold not-italic">genuinely enjoyable</span> — with premium tropical ingredients that improve taste, absorption, and results."</p>
-    <div class="w-12 h-0.5 bg-gold mx-auto mt-8 fade-up fade-up-delay-1"></div>
-  </div>
-</section>
-
-<!-- ===================== SHOP BY GOAL ===================== -->
+<!-- ===== SHOP BY GOAL ===== -->
 <section id="goals" class="py-20 bg-cream">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <div class="section-label mb-3 fade-up">Shop by Goal</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up fade-up-delay-1">What Are You Working Towards?</h2>
-      <p class="text-text-muted mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px;">Every ritual is designed around your goal — and formulated to taste incredible.</p>
+    <div class="text-center mb-10">
+      <div class="label mb-3 fade-up">Shop by Goal</div>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up d1">What Are You Working Towards?</h2>
     </div>
-    <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="goal-card fade-up" style="background: linear-gradient(160deg, #5C3317 0%, #3D1F0A 100%); min-height:300px;">
-        <div class="relative z-10 p-6 h-full flex flex-col justify-between" style="min-height:300px;">
+    <!-- 4-col large cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+      <!-- Weight & Balance -->
+      <div class="goal-card fade-up" style="min-height:320px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#5C3317 0%,#3D1F0A 60%,#2A1208 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%,rgba(196,124,43,.3),transparent 60%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);"></div>
+          <!-- ingredient dots -->
+          <div style="position:absolute;top:12px;right:12px;font-size:28px;opacity:.5;">☕</div>
+          <div style="position:absolute;top:40px;right:44px;font-size:20px;opacity:.35;">🫘</div>
+        </div>
+        <div class="gc-inner">
           <div>
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mb-3" style="background:rgba(244,168,38,0.2);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#F4A826" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <h3 class="text-white font-serif text-xl font-semibold leading-tight mb-1.5">Energy</h3>
-            <p class="text-white/65 font-sans text-xs leading-relaxed">Real, clean energy without the crash. Powered by tropical superfoods.</p>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center mb-3" style="background:rgba(244,168,38,.25);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F4A826" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="text-white font-serif text-lg font-semibold leading-tight mb-1">Weight &amp;<br>Balance</h3>
+            <p class="text-white/60 font-sans text-xs leading-relaxed mt-1">Support your goals and feel your best.</p>
           </div>
-          <div class="my-4 flex justify-center"><div class="rounded-xl shadow-lg" style="width:56px; height:74px; background:linear-gradient(180deg,#7B4A2D,#4A2510); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:6px;"><span class="text-white/80 text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">SLIM<br>COFFEE</span></div></div>
-          <a href="#" class="btn-primary btn-sm btn-outline-white text-center" style="font-size:10px;">Shop Energy</a>
+          <div>
+            <div class="pouch-wrap flex justify-center mb-3">
+              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#9B6040,#5A3015);">
+                <span class="pouch-label">SLIM<br>COFFEE</span>
+              </div>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Slim Coffee</a>
+          </div>
         </div>
       </div>
-      <div class="goal-card fade-up fade-up-delay-1" style="background: linear-gradient(160deg, #5C2040 0%, #3D0F2A 100%); min-height:300px;">
-        <div class="relative z-10 p-6 h-full flex flex-col justify-between" style="min-height:300px;">
+
+      <!-- Beauty & Glow -->
+      <div class="goal-card fade-up d1" style="min-height:320px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#6B1A40 0%,#4A0F2C 60%,#2E0A1C 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(232,149,109,.25),transparent 60%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);"></div>
+          <div style="position:absolute;top:12px;right:12px;font-size:28px;opacity:.5;">🫐</div>
+          <div style="position:absolute;top:40px;right:44px;font-size:20px;opacity:.35;">🌸</div>
+        </div>
+        <div class="gc-inner">
           <div>
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mb-3" style="background:rgba(232,149,109,0.2);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#E8956D" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-            <h3 class="text-white font-serif text-xl font-semibold leading-tight mb-1.5">Beauty</h3>
-            <p class="text-white/65 font-sans text-xs leading-relaxed">Nourish your beauty from within. Glow starts with what you consume.</p>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center mb-3" style="background:rgba(232,149,109,.25);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E8956D" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3 class="text-white font-serif text-lg font-semibold leading-tight mb-1">Beauty<br>&amp; Glow</h3>
+            <p class="text-white/60 font-sans text-xs leading-relaxed mt-1">Nourish your beauty from within.</p>
           </div>
-          <div class="my-4 flex justify-center"><div class="rounded-xl shadow-lg" style="width:56px; height:74px; background:linear-gradient(180deg,#8B3060,#5C1A3A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:6px;"><span class="text-white/80 text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">BEAUTY<br>COFFEE</span></div></div>
-          <a href="#" class="btn-primary btn-sm btn-outline-white text-center" style="font-size:10px;">Shop Beauty</a>
+          <div>
+            <div class="pouch-wrap flex justify-center mb-3">
+              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#9B4070,#5A1A3A);">
+                <span class="pouch-label">BEAUTY<br>COFFEE</span>
+              </div>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Beauty</a>
+          </div>
         </div>
       </div>
-      <div class="goal-card fade-up fade-up-delay-2" style="background: linear-gradient(160deg, #2E4A1A 0%, #1A2E0A 100%); min-height:300px;">
-        <div class="relative z-10 p-6 h-full flex flex-col justify-between" style="min-height:300px;">
+
+      <!-- Energy & Focus -->
+      <div class="goal-card fade-up d2" style="min-height:320px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1E4A1A 0%,#0F2A0A 60%,#08180A 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 20%,rgba(109,179,90,.3),transparent 60%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);"></div>
+          <div style="position:absolute;top:12px;right:12px;font-size:28px;opacity:.5;">🍵</div>
+          <div style="position:absolute;top:40px;right:44px;font-size:20px;opacity:.35;">🍄</div>
+        </div>
+        <div class="gc-inner">
           <div>
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mb-3" style="background:rgba(109,179,90,0.2);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#6DB35A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg></div>
-            <h3 class="text-white font-serif text-xl font-semibold leading-tight mb-1.5">Slim & Balance</h3>
-            <p class="text-white/65 font-sans text-xs leading-relaxed">Support your goals sustainably. No extremes — just daily balance.</p>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center mb-3" style="background:rgba(109,179,90,.25);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6DB35A" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            </div>
+            <h3 class="text-white font-serif text-lg font-semibold leading-tight mb-1">Energy<br>&amp; Focus</h3>
+            <p class="text-white/60 font-sans text-xs leading-relaxed mt-1">Clean energy and mental clarity.</p>
           </div>
-          <div class="my-4 flex justify-center"><div class="rounded-xl shadow-lg" style="width:56px; height:74px; background:linear-gradient(180deg,#4A7030,#253810); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:6px;"><span class="text-white/80 text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">MORINGA<br>+ ACAI</span></div></div>
-          <a href="#" class="btn-primary btn-sm btn-outline-white text-center" style="font-size:10px;">Shop Slim</a>
+          <div>
+            <div class="pouch-wrap flex justify-center mb-3">
+              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#508030,#203810);">
+                <span class="pouch-label">MUSHROOM<br>MATCHA</span>
+              </div>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Energy</a>
+          </div>
         </div>
       </div>
-      <div class="goal-card fade-up fade-up-delay-3" style="background: linear-gradient(160deg, #0F3347 0%, #061E2E 100%); min-height:300px;">
-        <div class="relative z-10 p-6 h-full flex flex-col justify-between" style="min-height:300px;">
+
+      <!-- Hydration & Recovery -->
+      <div class="goal-card fade-up d3" style="min-height:320px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0F3347 0%,#061E2E 60%,#031018 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 40% 20%,rgba(90,179,232,.25),transparent 60%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:50%;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);"></div>
+          <div style="position:absolute;top:12px;right:12px;font-size:28px;opacity:.5;">🌊</div>
+          <div style="position:absolute;top:40px;right:44px;font-size:20px;opacity:.35;">🍋</div>
+        </div>
+        <div class="gc-inner">
           <div>
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mb-3" style="background:rgba(90,179,232,0.2);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#5AB3E8" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
-            <h3 class="text-white font-serif text-xl font-semibold leading-tight mb-1.5">Hydration</h3>
-            <p class="text-white/65 font-sans text-xs leading-relaxed">Replenish what your body needs. Perform, recover, repeat.</p>
+            <div class="w-8 h-8 rounded-full flex items-center justify-center mb-3" style="background:rgba(90,179,232,.25);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5AB3E8" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            </div>
+            <h3 class="text-white font-serif text-lg font-semibold leading-tight mb-1">Hydration<br>&amp; Recovery</h3>
+            <p class="text-white/60 font-sans text-xs leading-relaxed mt-1">Replenish, refresh and perform.</p>
           </div>
-          <div class="my-4 flex justify-center"><div class="rounded-xl shadow-lg" style="width:56px; height:74px; background:linear-gradient(180deg,#1E5A7A,#0A3050); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:6px;"><span class="text-white/80 text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">HYDRATION<br>COFFEE</span></div></div>
-          <a href="#" class="btn-primary btn-sm btn-outline-white text-center" style="font-size:10px;">Shop Hydration</a>
+          <div>
+            <div class="pouch-wrap flex justify-center mb-3">
+              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#2A6A8A,#103050);">
+                <span class="pouch-label">HYDRATION<br>COFFEE</span>
+              </div>
+            </div>
+            <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Hydration</a>
+          </div>
         </div>
       </div>
-      <div class="goal-card fade-up fade-up-delay-4" style="background: linear-gradient(160deg, #1E3D1A 0%, #0F2A0A 100%); min-height:300px;">
-        <div class="relative z-10 p-6 h-full flex flex-col justify-between" style="min-height:300px;">
+    </div>
+
+    <!-- Row 2: Gut Health + Daily Wellness -->
+    <div class="grid grid-cols-2 gap-4">
+      <div class="goal-card fade-up" style="min-height:180px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#3A6020 0%,#204010 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(160,200,120,.2),transparent 60%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(0,0,0,.4),transparent);"></div>
+          <div style="position:absolute;top:12px;right:16px;font-size:36px;opacity:.5;">🌿</div>
+        </div>
+        <div class="gc-inner" style="flex-direction:row;align-items:flex-end;padding:20px;">
           <div>
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mb-3" style="background:rgba(160,200,120,0.2);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A0C878" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg></div>
-            <h3 class="text-white font-serif text-xl font-semibold leading-tight mb-1.5">Focus</h3>
-            <p class="text-white/65 font-sans text-xs leading-relaxed">Sharpen your mind. Stay productive without the jitters.</p>
+            <div class="w-7 h-7 rounded-full flex items-center justify-center mb-2" style="background:rgba(160,200,120,.25);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A0C878" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 class="text-white font-serif text-lg font-semibold mb-1">Gut Health</h3>
+            <p class="text-white/60 font-sans text-xs mb-3">Digestive wellness from tropical superfoods.</p>
+            <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Moringa</a>
           </div>
-          <div class="my-4 flex justify-center"><div class="rounded-xl shadow-lg" style="width:56px; height:74px; background:linear-gradient(180deg,#3D7030,#1E4010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:6px;"><span class="text-white/80 text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">MUSHROOM<br>MATCHA</span></div></div>
-          <a href="#" class="btn-primary btn-sm btn-outline-white text-center" style="font-size:10px;">Shop Focus</a>
+          <div class="pouch-wrap ml-auto">
+            <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#506A20,#304010);">
+              <span class="pouch-label">ORGANIC<br>MORINGA</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="goal-card fade-up" style="background: linear-gradient(160deg, #3D2060 0%, #20103A 100%); min-height:300px;">
-        <div class="relative z-10 p-6 h-full flex flex-col justify-between" style="min-height:300px;">
+      <div class="goal-card fade-up d1" style="min-height:180px;">
+        <div style="position:absolute;inset:0;background:linear-gradient(160deg,#5A4070 0%,#2A1840 100%);">
+          <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(160,96,224,.2),transparent 60%);"></div>
+          <div style="position:absolute;bottom:0;left:0;right:0;height:60%;background:linear-gradient(to top,rgba(0,0,0,.4),transparent);"></div>
+          <div style="position:absolute;top:12px;right:16px;font-size:36px;opacity:.5;">🫐</div>
+        </div>
+        <div class="gc-inner" style="flex-direction:row;align-items:flex-end;padding:20px;">
           <div>
-            <div class="w-9 h-9 rounded-full flex items-center justify-center mb-3" style="background:rgba(160,96,224,0.2);"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#A060E0" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
-            <h3 class="text-white font-serif text-xl font-semibold leading-tight mb-1.5">Recovery</h3>
-            <p class="text-white/65 font-sans text-xs leading-relaxed">Rest, repair, and restore. Give your body what it deserves.</p>
+            <div class="w-7 h-7 rounded-full flex items-center justify-center mb-2" style="background:rgba(160,96,224,.25);">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#A060E0" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </div>
+            <h3 class="text-white font-serif text-lg font-semibold mb-1">Daily Wellness</h3>
+            <p class="text-white/60 font-sans text-xs mb-3">Antioxidant-rich recovery &amp; vitality.</p>
+            <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Acai</a>
           </div>
-          <div class="my-4 flex justify-center"><div class="rounded-xl shadow-lg" style="width:56px; height:74px; background:linear-gradient(180deg,#5A4070,#2A1840); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:6px;"><span class="text-white/80 text-center" style="font-size:6px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">ACAI<br>+ PROTEIN</span></div></div>
-          <a href="#" class="btn-primary btn-sm btn-outline-white text-center" style="font-size:10px;">Shop Recovery</a>
+          <div class="pouch-wrap ml-auto">
+            <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#7A5090,#3A2050);">
+              <span class="pouch-label">ORGANIC<br>ACAI</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== BEST SELLERS ===================== -->
+<!-- ===== BEST SELLERS ===== -->
 <section id="bestsellers" class="py-20" style="background:#FAF8F2;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <div class="section-label mb-3 fade-up">Most Loved</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up fade-up-delay-1">Rituals Worth Starting</h2>
-      <p class="text-text-muted mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px;">Every product is made with tropical ingredients chosen for taste as much as function.</p>
+    <div class="text-center mb-10">
+      <div class="label mb-3 fade-up">Our Best Sellers</div>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up d1">Most Loved Wellness Rituals</h2>
     </div>
-    <div class="flex gap-5 overflow-x-auto pb-4 snap-x-scroll lg:grid lg:grid-cols-4 lg:overflow-visible lg:pb-0 xl:grid-cols-4" style="-webkit-overflow-scrolling:touch;">
+    <div class="flex gap-4 overflow-x-auto pb-4 snap-x lg:grid lg:grid-cols-6 lg:overflow-visible lg:pb-0">
 
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden relative" style="background:linear-gradient(160deg,#F5E6D3,#E8C9A0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#7B4A2D,#3D1F0A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#C47C2B,#F4A826);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">SLIM<br>COFFEE</span></div>
-          <div class="absolute top-2.5 right-2.5 bg-gold text-white rounded-full px-2 py-0.5" style="font-size:9px; font-family:'Raleway',sans-serif; font-weight:700;">BEST SELLER</div>
+      <!-- Slim Coffee -->
+      <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up">
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#F5E6D3,#E0C090);aspect-ratio:3/4;">
+          <div class="pouch" style="width:60%;height:65%;background:linear-gradient(160deg,#7B4A2D,#3D1F0A);">
+            <div class="w-5 h-5 rounded-full mb-1 opacity-80" style="background:linear-gradient(135deg,#C47C2B,#F4A826);z-index:3;position:relative;"></div>
+            <span class="pouch-label">SLIM<br>COFFEE</span>
+          </div>
+          <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1 pointer-events-none"><span style="font-size:14px;">☕</span><span style="font-size:14px;">🫘</span></div>
+          <div class="absolute top-2 right-2 text-white rounded-full px-2 py-0.5 font-bold" style="background:#C47C2B;font-size:7.5px;font-family:'Raleway',sans-serif;">BEST SELLER</div>
         </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#FDF0E0; color:#C47C2B;">Energy · Slim</div>
+        <div class="px-3 pb-4">
+          <div class="text-xs font-semibold mb-0.5" style="color:#C47C2B;font-family:'Raleway',sans-serif;">Slim Coffee Powder</div>
           <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Tropical Slim Coffee</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Metabolism support with a rich tropical coffee flavour.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(89)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$29.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
+          <div class="flex items-center gap-1 mb-2"><span class="stars text-xs">★★★★★</span><span class="text-text-muted text-xs">(89)</span></div>
+          <div class="mb-3"><span class="font-serif font-bold text-text-dark">$29.99</span></div>
+          <button class="btn btn-forest w-full" style="padding:9px;font-size:10px;border-radius:8px;">Add to Cart</button>
         </div>
       </div>
 
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-1">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#F5D6E8,#E8A0C0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#8B3060,#5C1A3A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#E8956D,#E8A8C0);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">BEAUTY<br>COFFEE</span></div>
+      <!-- Beauty Coffee -->
+      <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d1">
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#F5D6E8,#E0A0C0);aspect-ratio:3/4;">
+          <div class="pouch" style="width:60%;height:65%;background:linear-gradient(160deg,#8B3060,#5C1A3A);">
+            <div class="w-5 h-5 rounded-full mb-1 opacity-80" style="background:linear-gradient(135deg,#E8956D,#E8A8C0);z-index:3;position:relative;"></div>
+            <span class="pouch-label">BEAUTY<br>COFFEE</span>
+          </div>
+          <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1 pointer-events-none"><span style="font-size:14px;">🌸</span><span style="font-size:14px;">🫐</span></div>
         </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#FDE8F5; color:#8B3060;">Beauty · Glow</div>
+        <div class="px-3 pb-4">
+          <div class="text-xs font-semibold mb-0.5" style="color:#8B3060;font-family:'Raleway',sans-serif;">Beauty Coffee Powder</div>
           <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Tropical Beauty Coffee</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Collagen + antioxidants in every delicious cup.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(64)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$24.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
+          <div class="flex items-center gap-1 mb-2"><span class="stars text-xs">★★★★★</span><span class="text-text-muted text-xs">(64)</span></div>
+          <div class="mb-3"><span class="font-serif font-bold text-text-dark">$24.99</span></div>
+          <button class="btn btn-forest w-full" style="padding:9px;font-size:10px;border-radius:8px;">Add to Cart</button>
         </div>
       </div>
 
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-2">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#D6E8D0,#A0C8A0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#3D7030,#1E4010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#6DB35A,#A0C878);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">MUSHROOM<br>MATCHA</span></div>
+      <!-- Mushroom Matcha -->
+      <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d2">
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#D6E8D0,#A0C890);aspect-ratio:3/4;">
+          <div class="pouch" style="width:60%;height:65%;background:linear-gradient(160deg,#3D7030,#1E4010);">
+            <div class="w-5 h-5 rounded-full mb-1 opacity-80" style="background:linear-gradient(135deg,#6DB35A,#A0C878);z-index:3;position:relative;"></div>
+            <span class="pouch-label">MUSHROOM<br>MATCHA</span>
+          </div>
+          <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1 pointer-events-none"><span style="font-size:14px;">🍵</span><span style="font-size:14px;">🍄</span></div>
         </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#E8F5E0; color:#2D5A3D;">Focus · Energy</div>
-          <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Tropical Mushroom Matcha</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Lion's mane + ceremonial matcha for calm, sharp focus.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(72)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$14.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
+        <div class="px-3 pb-4">
+          <div class="text-xs font-semibold mb-0.5" style="color:#2D5A3D;font-family:'Raleway',sans-serif;">Mushroom Matcha Powder</div>
+          <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Mushroom Matcha</h4>
+          <div class="flex items-center gap-1 mb-2"><span class="stars text-xs">★★★★★</span><span class="text-text-muted text-xs">(72)</span></div>
+          <div class="mb-3"><span class="font-serif font-bold text-text-dark">$24.99</span></div>
+          <button class="btn btn-forest w-full" style="padding:9px;font-size:10px;border-radius:8px;">Add to Cart</button>
         </div>
       </div>
 
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-3">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#D0E8F5,#90C0E0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#1E5A7A,#0A3050); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#5AB3E8,#90D0F0);"></div><span class="text-white text-center" style="font-size:6.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">HYDRATION<br>COFFEE &amp;<br>ELECTROLYTES</span></div>
+      <!-- Hydration -->
+      <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d3">
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#D0E8F5,#90C0E0);aspect-ratio:3/4;">
+          <div class="pouch" style="width:60%;height:65%;background:linear-gradient(160deg,#1E5A7A,#0A3050);">
+            <div class="w-5 h-5 rounded-full mb-1 opacity-80" style="background:linear-gradient(135deg,#5AB3E8,#90D0F0);z-index:3;position:relative;"></div>
+            <span class="pouch-label" style="font-size:6px;">HYDRATION<br>COFFEE &<br>ELECTROLYTES</span>
+          </div>
+          <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1 pointer-events-none"><span style="font-size:14px;">💧</span><span style="font-size:14px;">🍋</span></div>
         </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#E0F0F8; color:#0F3347;">Hydration · Recovery</div>
-          <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Hydration Coffee &amp; Electrolytes</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Replenish, recover, and keep going strong.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(85)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$14.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
+        <div class="px-3 pb-4">
+          <div class="text-xs font-semibold mb-0.5" style="color:#0F3347;font-family:'Raleway',sans-serif;">Hydration Coffee &amp; Electrolytes</div>
+          <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Hydration &amp; Electrolytes</h4>
+          <div class="flex items-center gap-1 mb-2"><span class="stars text-xs">★★★★★</span><span class="text-text-muted text-xs">(85)</span></div>
+          <div class="mb-3"><span class="font-serif font-bold text-text-dark">$14.99</span></div>
+          <button class="btn btn-forest w-full" style="padding:9px;font-size:10px;border-radius:8px;">Add to Cart</button>
         </div>
       </div>
 
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E0D0F0,#B090D8); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#3D2060,#20103A); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#A060E0,#C090F8);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">PROTEIN<br>COFFEE</span></div>
+      <!-- Moringa -->
+      <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d4">
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#E8F0D0,#C0D890);aspect-ratio:3/4;">
+          <div class="pouch" style="width:60%;height:65%;background:linear-gradient(160deg,#506A20,#304010);">
+            <div class="w-5 h-5 rounded-full mb-1 opacity-80" style="background:linear-gradient(135deg,#90C840,#C8E870);z-index:3;position:relative;"></div>
+            <span class="pouch-label">ORGANIC<br>MORINGA</span>
+          </div>
+          <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1 pointer-events-none"><span style="font-size:14px;">🌿</span><span style="font-size:14px;">🌱</span></div>
         </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#EEE0FC; color:#3D2060;">Recovery · Strength</div>
-          <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Tropical Protein Coffee</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Premium protein meets rich coffee. Fuel your body and your day.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(54)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$19.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
-        </div>
-      </div>
-
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-1">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E8F0D0,#C0D890); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#506A20,#304010); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#90C840,#C8E870);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">ORGANIC<br>MORINGA</span></div>
-        </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#F0F8D8; color:#506A20;">Slim · Vitality</div>
+        <div class="px-3 pb-4">
+          <div class="text-xs font-semibold mb-0.5" style="color:#506A20;font-family:'Raleway',sans-serif;">Organic Moringa Powder</div>
           <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Organic Moringa</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Nature's most nutrient-dense superfood. Pure and potent.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(118)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$19.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
+          <div class="flex items-center gap-1 mb-2"><span class="stars text-xs">★★★★★</span><span class="text-text-muted text-xs">(118)</span></div>
+          <div class="mb-3"><span class="font-serif font-bold text-text-dark">$19.99</span></div>
+          <button class="btn btn-forest w-full" style="padding:9px;font-size:10px;border-radius:8px;">Add to Cart</button>
         </div>
       </div>
 
-      <div class="product-card flex-shrink-0 w-52 lg:w-auto fade-up fade-up-delay-2">
-        <div class="p-1.5 prod-img-wrap"><div class="rounded-xl overflow-hidden" style="background:linear-gradient(160deg,#E8D0F5,#C090E0); aspect-ratio:3/4; display:flex; align-items:center; justify-content:center;">
-          <div class="mockup-pouch" style="width:62%; height:68%; background:linear-gradient(160deg,#5A4070,#2A1840); display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:10px;"><div class="w-6 h-6 rounded-full mb-2 opacity-80" style="background:linear-gradient(135deg,#A060E0,#D090F0);"></div><span class="text-white text-center" style="font-size:7px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.3;">ORGANIC<br>ACAI</span></div>
+      <!-- Acai -->
+      <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d5">
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#E8D0F5,#C090E0);aspect-ratio:3/4;">
+          <div class="pouch" style="width:60%;height:65%;background:linear-gradient(160deg,#5A4070,#2A1840);">
+            <div class="w-5 h-5 rounded-full mb-1 opacity-80" style="background:linear-gradient(135deg,#A060E0,#D090F0);z-index:3;position:relative;"></div>
+            <span class="pouch-label">ORGANIC<br>ACAI</span>
+          </div>
+          <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1 pointer-events-none"><span style="font-size:14px;">🫐</span><span style="font-size:14px;">✨</span></div>
         </div></div>
-        <div class="p-4">
-          <div class="pill mb-2" style="background:#F0E0FC; color:#5A4070;">Beauty · Recovery</div>
+        <div class="px-3 pb-4">
+          <div class="text-xs font-semibold mb-0.5" style="color:#5A4070;font-family:'Raleway',sans-serif;">Organic Acai Powder</div>
           <h4 class="font-serif font-semibold text-text-dark text-sm mb-1 leading-snug">Organic Acai</h4>
-          <p class="text-text-muted font-sans mb-2" style="font-size:11px; line-height:1.5;">Antioxidant-rich tropical superberry for skin and recovery.</p>
-          <div class="flex items-center gap-1 mb-3"><div class="stars text-xs">★★★★★</div><span class="text-text-muted text-xs">(100)</span></div>
-          <div class="mb-3"><span class="font-serif font-bold text-text-dark text-base">$14.99</span></div>
-          <button class="btn-primary w-full" style="padding:10px; font-size:10px; border-radius:10px;">Add to Cart</button>
+          <div class="flex items-center gap-1 mb-2"><span class="stars text-xs">★★★★★</span><span class="text-text-muted text-xs">(100)</span></div>
+          <div class="mb-3"><span class="font-serif font-bold text-text-dark">$14.99</span></div>
+          <button class="btn btn-forest w-full" style="padding:9px;font-size:10px;border-radius:8px;">Add to Cart</button>
         </div>
       </div>
 
     </div>
-    <div class="text-center mt-10 fade-up"><a href="#" class="btn-primary btn-outline">View All Products</a></div>
   </div>
 </section>
 
-<!-- ===================== TROPICAL INGREDIENTS ===================== -->
-<section class="py-16 overflow-hidden" style="background: linear-gradient(135deg, #1A3628 0%, #2D5A3D 40%, #1E4A30 100%);">
+<!-- ===== TRUST BAR ===== -->
+<section class="py-12 bg-cream border-y border-gray-100">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-8">
+      <div class="trust-item fade-up">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#E8F2EC;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="font-serif font-semibold text-text-dark text-sm">USDA Organic</div><div class="text-text-muted font-sans text-xs mt-0.5">Ingredients sourced from nature you can trust.</div></div>
+      </div>
+      <div class="trust-item fade-up d1">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#FEF3E0;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C47C2B" stroke-width="1.8"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div>
+        <div><div class="font-serif font-semibold text-text-dark text-sm">Functional Formulas</div><div class="text-text-muted font-sans text-xs mt-0.5">Targeted benefits that make a difference.</div></div>
+      </div>
+      <div class="trust-item fade-up d2">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#FDE8F5;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8B3060" stroke-width="1.8"><path d="M12 22C12 22 2 16 2 9a5 5 0 0 1 10 0 5 5 0 0 1 10 0c0 7-10 13-10 13z"/></svg></div>
+        <div><div class="font-serif font-semibold text-text-dark text-sm">Delicious Taste</div><div class="text-text-muted font-sans text-xs mt-0.5">Rituals you'll love. Rituals you'll keep.</div></div>
+      </div>
+      <div class="trust-item fade-up d3">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center" style="background:#E0F0F8;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F3347" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+        <div><div class="font-serif font-semibold text-text-dark text-sm">Lab Tested &amp; Certified</div><div class="text-text-muted font-sans text-xs mt-0.5">Premium quality you can count on.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WELLNESS BENEFITS ===== -->
+<section id="benefits" class="py-20 bg-cream">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="mb-3 fade-up" style="font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(196,124,43,0.9);">Nature's Best</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-cream fade-up fade-up-delay-1">Ingredients Sourced From the Tropics</h2>
-      <p class="text-cream/60 mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px; max-width:480px; margin-left:auto; margin-right:auto;">Every formula starts with ingredients that look, smell, and taste like they came straight from the source.</p>
-    </div>
-    <div class="grid grid-cols-3 sm:grid-cols-6 gap-6 fade-up fade-up-delay-2">
-      <div class="ingredient-chip">
-        <div class="ingredient-orb" style="background: linear-gradient(135deg, #5C3317, #3D1F0A);">
-          <span style="font-size:28px;">☕</span>
-        </div>
-        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Arabica<br>Coffee</span>
-      </div>
-      <div class="ingredient-chip">
-        <div class="ingredient-orb" style="background: linear-gradient(135deg, #1E4A1A, #0F2A0A);">
-          <span style="font-size:28px;">🍵</span>
-        </div>
-        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Ceremonial<br>Matcha</span>
-      </div>
-      <div class="ingredient-chip">
-        <div class="ingredient-orb" style="background: linear-gradient(135deg, #3A6020, #204010);">
-          <span style="font-size:28px;">🌿</span>
-        </div>
-        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Organic<br>Moringa</span>
-      </div>
-      <div class="ingredient-chip">
-        <div class="ingredient-orb" style="background: linear-gradient(135deg, #5A2060, #300F3A);">
-          <span style="font-size:28px;">🫐</span>
-        </div>
-        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Wild<br>Acai</span>
-      </div>
-      <div class="ingredient-chip">
-        <div class="ingredient-orb" style="background: linear-gradient(135deg, #3D6A20, #1E3A10);">
-          <span style="font-size:28px;">🍄</span>
-        </div>
-        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Lion's<br>Mane</span>
-      </div>
-      <div class="ingredient-chip">
-        <div class="ingredient-orb" style="background: linear-gradient(135deg, #0F3A50, #061E30);">
-          <span style="font-size:28px;">🌊</span>
-        </div>
-        <span class="text-cream/80 font-sans font-semibold text-center" style="font-size:11px; letter-spacing:0.06em;">Ocean<br>Electrolytes</span>
-      </div>
-    </div>
-    <div class="mt-14 grid sm:grid-cols-3 gap-5 fade-up fade-up-delay-3">
-      <div class="rounded-2xl p-6 text-center" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.1); backdrop-filter:blur(8px);">
-        <div class="text-4xl mb-3">🌱</div>
-        <h4 class="text-cream font-serif font-semibold text-base mb-2">From Soil to Scoop</h4>
-        <p class="text-cream/55 font-sans text-sm leading-relaxed">Every ingredient is traceable to its origin — grown without pesticides, harvested at peak potency.</p>
-      </div>
-      <div class="rounded-2xl p-6 text-center" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.1); backdrop-filter:blur(8px);">
-        <div class="text-4xl mb-3">🔬</div>
-        <h4 class="text-cream font-serif font-semibold text-base mb-2">Bioavailable by Design</h4>
-        <p class="text-cream/55 font-sans text-sm leading-relaxed">Tropical ingredients are naturally rich in co-factors that enhance absorption. More gets in. More gets to work.</p>
-      </div>
-      <div class="rounded-2xl p-6 text-center" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.1); backdrop-filter:blur(8px);">
-        <div class="text-4xl mb-3">✨</div>
-        <h4 class="text-cream font-serif font-semibold text-base mb-2">Taste Is Not an Accident</h4>
-        <p class="text-cream/55 font-sans text-sm leading-relaxed">We chose ingredients that taste incredible on purpose — because the ritual you enjoy is the ritual you keep.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== WHY TROPICAL ===================== -->
-<section class="py-16 bg-cream">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <div class="section-label mb-3 fade-up">Our Difference</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up fade-up-delay-1">Why TROPICAL?</h2>
-      <p class="text-text-muted mt-3 max-w-xl mx-auto font-sans fade-up fade-up-delay-2" style="font-size:15px; line-height:1.75;">We built TROPICAL because we believed you shouldn't have to choose between something that works and something you actually want to consume.</p>
-    </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
-      <div class="text-center fade-up p-6">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:#E8F2EC;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-2">USDA Organic</h4>
-        <p class="text-text-muted font-sans text-sm leading-relaxed">Every ingredient is sourced from nature — traceable, clean, and certified.</p>
-      </div>
-      <div class="text-center fade-up fade-up-delay-1 p-6">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:#FEF3E0;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C47C2B" stroke-width="1.8"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg></div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-2">Actually Delicious</h4>
-        <p class="text-text-muted font-sans text-sm leading-relaxed">Tropical ingredients don't just add function — they make every sip a pleasure.</p>
-      </div>
-      <div class="text-center fade-up fade-up-delay-2 p-6">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:#FDE8F5;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8B3060" stroke-width="1.8"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg></div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-2">Functional Formulas</h4>
-        <p class="text-text-muted font-sans text-sm leading-relaxed">Bioavailable ingredients chosen because they absorb better, not just cost less.</p>
-      </div>
-      <div class="text-center fade-up fade-up-delay-3 p-6">
-        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:#E0F0F8;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0F3347" stroke-width="1.8"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-2">Third-Party Tested</h4>
-        <p class="text-text-muted font-sans text-sm leading-relaxed">Every batch is independently tested. What the label says is what you get.</p>
-      </div>
-    </div>
-    <div class="text-center mt-10 fade-up"><a href="#" class="btn-primary btn-outline">Our Story</a></div>
-  </div>
-</section>
-
-<!-- ===================== DAILY RITUAL ===================== -->
-<section id="ritual" class="py-20" style="background: linear-gradient(135deg, #1A3628 0%, #2D5A3D 50%, #1A3628 100%);">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-14">
-      <div class="mb-3 fade-up" style="font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(196,124,43,0.9);">The TROPICAL Method</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-cream fade-up fade-up-delay-1">Your Daily Wellness Ritual</h2>
-      <p class="text-cream/60 mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px;">Small moments. Big results. Rituals you'll actually look forward to.</p>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up">Wellness That Works For You</h2>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="rounded-2xl p-6 fade-up" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.12); backdrop-filter:blur(8px);">
-        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(244,168,38,0.2);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F4A826" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></div><span style="font-family:'Raleway',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#F4A826;">Morning</span></div>
-        <div class="rounded-xl mb-4" style="height:110px; background:linear-gradient(135deg,#7B4A2D,#3D1F0A); display:flex; align-items:center; justify-content:center;"><div class="rounded-lg shadow-md" style="width:46px; height:60px; background:linear-gradient(160deg,#9B6040,#5A3015); display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">SLIM<br>COFFEE</span></div></div>
-        <p class="text-cream/70 font-sans text-sm mb-2 leading-relaxed">Kickstart your metabolism and ignite your energy — before the world needs anything from you.</p>
-        <span class="text-cream font-serif font-semibold text-sm">Tropical Slim Coffee</span>
+
+      <div class="ben-card fade-up">
+        <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#7B4A2D,#3D1F0A);display:flex;align-items:center;justify-content:center;gap:10px;">
+          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#9B6040,#5A3015);"><span class="pouch-label">SLIM<br>COFFEE</span></div>
+          <div style="font-size:28px;opacity:.6;">☕</div>
+        </div></div>
+        <div class="p-5">
+          <div class="label mb-2" style="font-size:9px;">Weight Management</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-3">Slim Coffee</h4>
+          <ul class="space-y-1.5 mb-5">
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Supports metabolism</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Helps control appetite</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Natural energy boost</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
       </div>
-      <div class="rounded-2xl p-6 fade-up fade-up-delay-1" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.12); backdrop-filter:blur(8px);">
-        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(160,200,120,0.2);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#A0C878" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg></div><span style="font-family:'Raleway',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#A0C878;">Midday</span></div>
-        <div class="rounded-xl mb-4" style="height:110px; background:linear-gradient(135deg,#3D7030,#1E4010); display:flex; align-items:center; justify-content:center;"><div class="rounded-lg shadow-md" style="width:46px; height:60px; background:linear-gradient(160deg,#508030,#203810); display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">MUSHROOM<br>MATCHA</span></div></div>
-        <p class="text-cream/70 font-sans text-sm mb-2 leading-relaxed">Replace the afternoon slump with sharp, jitter-free focus. Your mind, clear and ready.</p>
-        <span class="text-cream font-serif font-semibold text-sm">Mushroom Matcha</span>
+
+      <div class="ben-card fade-up d1">
+        <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#8B3060,#5C1A3A);display:flex;align-items:center;justify-content:center;gap:10px;">
+          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#A04070,#6A1840);"><span class="pouch-label">BEAUTY<br>COFFEE</span></div>
+          <div style="font-size:28px;opacity:.6;">🌸</div>
+        </div></div>
+        <div class="p-5">
+          <div class="label mb-2" style="font-size:9px;color:#8B3060;">Beauty &amp; Glow</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-3">Beauty Coffee</h4>
+          <ul class="space-y-1.5 mb-5">
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Collagen + Cinnamon</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Supports radiant skin</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Stronger hair &amp; nails</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
       </div>
-      <div class="rounded-2xl p-6 fade-up fade-up-delay-2" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.12); backdrop-filter:blur(8px);">
-        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(90,179,232,0.2);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5AB3E8" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg></div><span style="font-family:'Raleway',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#5AB3E8;">Workout</span></div>
-        <div class="rounded-xl mb-4" style="height:110px; background:linear-gradient(135deg,#1E5A7A,#0A3050); display:flex; align-items:center; justify-content:center;"><div class="rounded-lg shadow-md" style="width:46px; height:60px; background:linear-gradient(160deg,#2A6A8A,#103050); display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">HYDRATION<br>COFFEE</span></div></div>
-        <p class="text-cream/70 font-sans text-sm mb-2 leading-relaxed">Hydrate, push harder, recover faster. Every rep earns its reward.</p>
-        <span class="text-cream font-serif font-semibold text-sm">Hydration Coffee &amp; Electrolytes</span>
+
+      <div class="ben-card fade-up d2">
+        <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#3D7030,#1E4010);display:flex;align-items:center;justify-content:center;gap:10px;">
+          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#508030,#203810);"><span class="pouch-label">MUSHROOM<br>MATCHA</span></div>
+          <div style="font-size:28px;opacity:.6;">🍄</div>
+        </div></div>
+        <div class="p-5">
+          <div class="label mb-2" style="font-size:9px;">Focus &amp; Clarity</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-3">Mushroom Matcha</h4>
+          <ul class="space-y-1.5 mb-5">
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Clean energy</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Improves focus</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Reduces stress</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
       </div>
-      <div class="rounded-2xl p-6 fade-up fade-up-delay-3" style="background:rgba(253,251,244,0.07); border:1px solid rgba(253,251,244,0.12); backdrop-filter:blur(8px);">
-        <div class="flex items-center gap-3 mb-4"><div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" style="background:rgba(139,48,96,0.25);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C080A0" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div><span style="font-family:'Raleway',sans-serif; font-size:10px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:#C080A0;">Evening</span></div>
-        <div class="rounded-xl mb-4" style="height:110px; background:linear-gradient(135deg,#8B3060,#5C1A3A); display:flex; align-items:center; justify-content:center;"><div class="rounded-lg shadow-md" style="width:46px; height:60px; background:linear-gradient(160deg,#A04070,#6A1840); display:flex; align-items:flex-end; justify-content:center; padding-bottom:5px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">BEAUTY<br>COFFEE</span></div></div>
-        <p class="text-cream/70 font-sans text-sm mb-2 leading-relaxed">Wind down with a ritual that works while you rest. Wake up glowing.</p>
-        <span class="text-cream font-serif font-semibold text-sm">Tropical Beauty Coffee</span>
+
+      <div class="ben-card fade-up d3">
+        <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#1E5A7A,#0A3050);display:flex;align-items:center;justify-content:center;gap:10px;">
+          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#2A6A8A,#103050);"><span class="pouch-label" style="font-size:5.5px;">HYDRATION<br>COFFEE &<br>ELECTROLYTES</span></div>
+          <div style="font-size:28px;opacity:.6;">💧</div>
+        </div></div>
+        <div class="p-5">
+          <div class="label mb-2" style="font-size:9px;color:#0F3347;">Hydration &amp; Recovery</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-3">Hydration Coffee<br>&amp; Electrolytes</h4>
+          <ul class="space-y-1.5 mb-5">
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Replenishes electrolytes</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Supports recovery</li>
+            <li class="flex items-start gap-2 text-text-muted font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2D5A3D" stroke-width="2.5" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Great taste</li>
+          </ul>
+          <a href="#" class="btn btn-outline btn-sm">Learn More</a>
+        </div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ===================== SOCIAL PROOF ===================== -->
-<section class="py-20 bg-cream">
+<!-- ===== TESTIMONIALS ===== -->
+<section class="py-20" style="background:#FAF8F2;">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="section-label mb-3 fade-up">Real People. Real Results.</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up fade-up-delay-1">They Made It a Ritual</h2>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up">Real People. Real Results.</h2>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
-      <div class="testi-card fade-up">
-        <div class="flex items-center gap-3 mb-4"><div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-serif font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#C47C2B,#E8A84A);">J</div><div><div class="font-sans font-semibold text-text-dark text-sm">Jessica R.</div><div class="stars text-xs">★★★★★</div></div></div>
-        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"I've tried so many wellness products that tasted awful. Slim Coffee is the first one I genuinely look forward to every morning. And it actually works."</p>
+      <div class="testi fade-up">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-serif font-bold flex-shrink-0" style="background:linear-gradient(135deg,#C47C2B,#E8A84A);font-size:16px;">J</div>
+          <div><div class="font-sans font-semibold text-text-dark text-sm">Jessica R.</div><div class="stars text-xs">★★★★★</div></div>
+        </div>
+        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Slim Coffee has become my daily ritual. It helps me stay on track and feel great all day."</p>
       </div>
-      <div class="testi-card fade-up fade-up-delay-1">
-        <div class="flex items-center gap-3 mb-4"><div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-serif font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#8B3060,#C06090);">A</div><div><div class="font-sans font-semibold text-text-dark text-sm">Amanda L.</div><div class="stars text-xs">★★★★★</div></div></div>
-        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Beauty Coffee is my evening ritual now. My skin has genuinely changed and I feel more confident. The taste is incredible — like a luxury treat."</p>
+      <div class="testi fade-up d1">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-serif font-bold flex-shrink-0" style="background:linear-gradient(135deg,#8B3060,#C06090);font-size:16px;">A</div>
+          <div><div class="font-sans font-semibold text-text-dark text-sm">Amanda L.</div><div class="stars text-xs">★★★★★</div></div>
+        </div>
+        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Beauty Coffee is a game changer! My skin looks brighter and I feel more confident."</p>
       </div>
-      <div class="testi-card fade-up fade-up-delay-2">
-        <div class="flex items-center gap-3 mb-4"><div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-serif font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#2D5A3D,#4A8A60);">M</div><div><div class="font-sans font-semibold text-text-dark text-sm">Michael T.</div><div class="stars text-xs">★★★★★</div></div></div>
-        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Mushroom Matcha replaced my second coffee. No crash, just clear focus all afternoon. I didn't expect healthy to taste this smooth."</p>
+      <div class="testi fade-up d2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-serif font-bold flex-shrink-0" style="background:linear-gradient(135deg,#2D5A3D,#4A8A60);font-size:16px;">M</div>
+          <div><div class="font-sans font-semibold text-text-dark text-sm">Michael T.</div><div class="stars text-xs">★★★★★</div></div>
+        </div>
+        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Mushroom Matcha gives me the clean energy and focus I need to get things done."</p>
       </div>
-      <div class="testi-card fade-up fade-up-delay-3">
-        <div class="flex items-center gap-3 mb-4"><div class="w-11 h-11 rounded-full flex items-center justify-center text-white font-serif font-bold text-sm flex-shrink-0" style="background:linear-gradient(135deg,#0F3347,#1E5A7A);">D</div><div><div class="font-sans font-semibold text-text-dark text-sm">David K.</div><div class="stars text-xs">★★★★★</div></div></div>
-        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Hydration Coffee is a game changer post-workout. It tastes like something you'd order at a café. My recovery has genuinely improved."</p>
+      <div class="testi fade-up d3">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-serif font-bold flex-shrink-0" style="background:linear-gradient(135deg,#0F3347,#1E5A7A);font-size:16px;">D</div>
+          <div><div class="font-sans font-semibold text-text-dark text-sm">David K.</div><div class="stars text-xs">★★★★★</div></div>
+        </div>
+        <p class="text-text-muted font-sans text-sm leading-relaxed italic">"Hydration Coffee is my go-to after workouts. I love the taste and how it makes me feel."</p>
       </div>
     </div>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-6 fade-up">
-      <div class="flex items-center gap-3 bg-white rounded-2xl px-6 py-4 shadow-sm"><div><span class="font-sans font-bold text-text-dark text-sm">Trustpilot</span><div class="stars text-base">★★★★★</div></div><div><span class="font-serif font-bold text-text-dark text-xl">4.8</span><span class="text-text-muted text-sm">/5</span><div class="text-text-muted text-xs">Excellent</div></div></div>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-5 fade-up">
+      <div class="flex items-center gap-4 bg-white rounded-2xl px-6 py-4 shadow-sm">
+        <div><div class="font-sans font-bold text-text-dark text-sm">Trustpilot</div><div class="stars">★★★★★</div></div>
+        <div><div class="font-serif font-bold text-text-dark text-2xl">4.8</div><div class="text-text-muted text-xs">Excellent · 4.8 out of 5</div></div>
+      </div>
       <div class="flex items-center gap-3 bg-white rounded-2xl px-6 py-4 shadow-sm">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        <div><span class="font-sans font-bold text-text-dark text-sm">Google</span><div class="flex items-center gap-1"><div class="stars text-base">★★★★★</div><span class="font-serif font-bold text-text-dark">4.9</span></div></div>
+        <div><div class="font-sans font-bold text-text-dark text-sm">Google</div><div class="flex items-center gap-1"><div class="stars">★★★★★</div><span class="font-serif font-bold text-text-dark">4.9</span></div><div class="text-text-muted text-xs">4.9 out of 5</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== BUNDLES ===================== -->
-<section id="bundles" class="py-20" style="background:#FAF8F2;">
+<!-- ===== BUNDLES ===== -->
+<section id="bundles" class="py-20 bg-cream">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
-      <div class="section-label mb-3 fade-up">Curated Sets</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up fade-up-delay-1">Build Your Wellness Stack</h2>
-      <p class="text-text-muted mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px;">Goal-designed bundles. Save 20% and commit to the ritual.</p>
+      <div class="label mb-3 fade-up">Save More</div>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up d1">Build Your Perfect Wellness Stack</h2>
+      <p class="text-text-muted mt-3 font-sans fade-up d2" style="font-size:15px;">Save more with our most loved bundles.</p>
     </div>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-      <div class="bundle-card fade-up"><div class="p-5">
-        <div class="flex gap-2 mb-4 justify-center" style="height:80px; align-items:center;">
-          <div class="rounded-lg shadow" style="width:44px; height:60px; background:linear-gradient(160deg,#7B4A2D,#3D1F0A); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">SLIM<br>COFFEE</span></div>
-          <span class="text-text-muted font-light text-xl">+</span>
-          <div class="rounded-lg shadow" style="width:44px; height:60px; background:linear-gradient(160deg,#1E5A7A,#0A3050); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">HYDRATION<br>COFFEE</span></div>
+
+      <div class="bun-card fade-up">
+        <div class="p-4">
+          <div class="flex items-center justify-center gap-2 mb-4" style="height:80px;">
+            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#7B4A2D,#3D1F0A);"><span class="pouch-label">SLIM<br>COFFEE</span></div>
+            <span class="text-text-muted text-lg font-light">+</span>
+            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#1E5A7A,#0A3050);"><span class="pouch-label" style="font-size:5.5px;">HYDRATION<br>COFFEE</span></div>
+          </div>
+          <div class="inline-flex items-center rounded-full px-2.5 py-1 mb-2" style="background:#FDF0E0;color:#C47C2B;font-size:10px;font-weight:700;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Save 20%</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Weight Support Bundle</h4>
+          <p class="text-text-muted font-sans text-xs mb-3">Slim Coffee + Hydration Coffee</p>
+          <div class="flex items-center gap-2 mb-4"><span class="font-serif font-bold text-text-dark text-lg">$39.99</span><span class="text-text-muted text-sm line-through">$49.00</span></div>
+          <button class="btn btn-gold w-full" style="padding:11px;font-size:11px;border-radius:8px;">Shop Bundle</button>
         </div>
-        <div class="pill mb-2" style="background:#FDF0E0; color:#C47C2B;">Save 20%</div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Energy &amp; Slim Bundle</h4>
-        <p class="text-text-muted font-sans text-xs mb-3">Slim Coffee + Hydration Coffee</p>
-        <div class="flex items-center gap-2 mb-4"><span class="font-serif font-bold text-text-dark text-lg">$39.99</span><span class="text-text-muted text-sm line-through">$48.00</span></div>
-        <button class="btn-primary w-full btn-gold" style="padding:11px; font-size:11px; border-radius:10px;">Shop Bundle</button>
-      </div></div>
-      <div class="bundle-card fade-up fade-up-delay-1"><div class="p-5">
-        <div class="flex gap-2 mb-4 justify-center" style="height:80px; align-items:center;">
-          <div class="rounded-lg shadow" style="width:44px; height:60px; background:linear-gradient(160deg,#8B3060,#5C1A3A); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">BEAUTY<br>COFFEE</span></div>
-          <span class="text-text-muted font-light text-xl">+</span>
-          <div class="rounded-lg shadow" style="width:44px; height:60px; background:linear-gradient(160deg,#5A4070,#2A1840); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">ACAI</span></div>
+      </div>
+
+      <div class="bun-card fade-up d1">
+        <div class="p-4">
+          <div class="flex items-center justify-center gap-2 mb-4" style="height:80px;">
+            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#8B3060,#5C1A3A);"><span class="pouch-label">BEAUTY<br>COFFEE</span></div>
+            <span class="text-text-muted text-lg font-light">+</span>
+            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#5A4070,#2A1840);"><span class="pouch-label">ORGANIC<br>ACAI</span></div>
+          </div>
+          <div class="inline-flex items-center rounded-full px-2.5 py-1 mb-2" style="background:#FDE8F5;color:#8B3060;font-size:10px;font-weight:700;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Save 20%</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Beauty Glow Bundle</h4>
+          <p class="text-text-muted font-sans text-xs mb-3">Beauty Coffee + Acai Powder</p>
+          <div class="flex items-center gap-2 mb-4"><span class="font-serif font-bold text-text-dark text-lg">$34.99</span><span class="text-text-muted text-sm line-through">$44.00</span></div>
+          <button class="btn btn-gold w-full" style="padding:11px;font-size:11px;border-radius:8px;">Shop Bundle</button>
         </div>
-        <div class="pill mb-2" style="background:#FDE8F5; color:#8B3060;">Save 20%</div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Beauty Glow Bundle</h4>
-        <p class="text-text-muted font-sans text-xs mb-3">Beauty Coffee + Organic Acai</p>
-        <div class="flex items-center gap-2 mb-4"><span class="font-serif font-bold text-text-dark text-lg">$34.99</span><span class="text-text-muted text-sm line-through">$44.00</span></div>
-        <button class="btn-primary w-full btn-gold" style="padding:11px; font-size:11px; border-radius:10px;">Shop Bundle</button>
-      </div></div>
-      <div class="bundle-card fade-up fade-up-delay-2"><div class="p-5">
-        <div class="flex gap-2 mb-4 justify-center" style="height:80px; align-items:center;">
-          <div class="rounded-lg shadow" style="width:44px; height:60px; background:linear-gradient(160deg,#3D7030,#1E4010); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">MUSHROOM<br>MATCHA</span></div>
-          <span class="text-text-muted font-light text-xl">+</span>
-          <div class="rounded-lg shadow" style="width:44px; height:60px; background:linear-gradient(160deg,#506A20,#304010); display:flex; align-items:flex-end; justify-content:center; padding-bottom:4px;"><span class="text-white text-center" style="font-size:5.5px; font-weight:700; font-family:'Raleway',sans-serif; line-height:1.2;">MORINGA</span></div>
+      </div>
+
+      <div class="bun-card fade-up d2">
+        <div class="p-4">
+          <div class="flex items-center justify-center gap-2 mb-4" style="height:80px;">
+            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#3D7030,#1E4010);"><span class="pouch-label">MUSHROOM<br>MATCHA</span></div>
+            <span class="text-text-muted text-lg font-light">+</span>
+            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#506A20,#304010);"><span class="pouch-label">ORGANIC<br>MORINGA</span></div>
+          </div>
+          <div class="inline-flex items-center rounded-full px-2.5 py-1 mb-2" style="background:#E8F5E0;color:#2D5A3D;font-size:10px;font-weight:700;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Save 20%</div>
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Energy &amp; Focus Bundle</h4>
+          <p class="text-text-muted font-sans text-xs mb-3">Matcha + Moringa</p>
+          <div class="flex items-center gap-2 mb-4"><span class="font-serif font-bold text-text-dark text-lg">$39.99</span><span class="text-text-muted text-sm line-through">$49.00</span></div>
+          <button class="btn btn-gold w-full" style="padding:11px;font-size:11px;border-radius:8px;">Shop Bundle</button>
         </div>
-        <div class="pill mb-2" style="background:#E8F5E0; color:#2D5A3D;">Save 20%</div>
-        <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Focus &amp; Vitality Bundle</h4>
-        <p class="text-text-muted font-sans text-xs mb-3">Mushroom Matcha + Organic Moringa</p>
-        <div class="flex items-center gap-2 mb-4"><span class="font-serif font-bold text-text-dark text-lg">$29.99</span><span class="text-text-muted text-sm line-through">$37.00</span></div>
-        <button class="btn-primary w-full btn-gold" style="padding:11px; font-size:11px; border-radius:10px;">Shop Bundle</button>
-      </div></div>
-      <div class="rounded-2xl p-6 flex flex-col justify-between fade-up fade-up-delay-3" style="background:linear-gradient(160deg,#1A3628,#2D5A3D); min-height:240px;">
+      </div>
+
+      <!-- CTA card -->
+      <div class="rounded-2xl p-6 flex flex-col justify-between fade-up d3" style="background:linear-gradient(160deg,#1A3628,#2D5A3D);min-height:280px;">
         <div>
-          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:rgba(196,124,43,0.3);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4A826" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
-          <h3 class="font-serif text-cream text-xl font-semibold mb-2 leading-snug">Start Your Wellness Journey</h3>
-          <p class="text-cream/60 font-sans text-sm leading-relaxed">The best ritual is the one you enjoy. Find yours.</p>
+          <div class="w-10 h-10 rounded-full flex items-center justify-center mb-4" style="background:rgba(196,124,43,.3);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4A826" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          </div>
+          <h3 class="font-serif text-cream text-xl font-semibold mb-2 leading-snug">Start Your<br>Wellness Journey</h3>
+          <p class="text-cream/60 font-sans text-sm leading-relaxed">Small daily choices lead to a healthier, happier you.</p>
         </div>
-        <div class="mt-5 space-y-1.5">
+        <div class="space-y-2 mt-5">
           <div class="flex items-center gap-2 text-cream/60 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Secure Payments</div>
           <div class="flex items-center gap-2 text-cream/60 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Fast Shipping</div>
-          <div class="flex items-center gap-2 text-cream/60 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>30-Day Guarantee</div>
-          <a href="#" class="btn-primary btn-gold w-full mt-4" style="display:flex; justify-content:center; padding:12px; font-size:11px; border-radius:10px;">Shop Now</a>
+          <div class="flex items-center gap-2 text-cream/60 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>30-Day Money Back</div>
+          <a href="#" class="btn btn-gold w-full mt-4" style="display:flex;justify-content:center;padding:12px;font-size:11px;border-radius:8px;">Shop Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== LEARN / BLOG ===== -->
+<section id="learn" class="py-20" style="background:#FAF8F2;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-4">
+      <div class="label mb-2 fade-up">Learn Wellness</div>
+      <p class="text-text-muted font-sans fade-up d1" style="font-size:14px;">Tips, ingredients and wellness advice.</p>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div class="blog-card fade-up">
+        <div class="bi" style="height:190px;position:relative;">
+          <div style="height:190px;background:linear-gradient(135deg,#E8D0B8,#C8A878);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:60px;opacity:.4;">☕</span>
+          </div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.25) 0%,transparent 60%);"></div>
+          <div class="absolute bottom-3 left-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full" style="background:rgba(26,54,40,.85);color:#FDFBF4;font-size:9px;font-weight:600;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Beauty &amp; Glow</span></div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">Why Collagen Matters For Your Skin &amp; Hair</h4>
+          <p class="text-text-muted font-sans text-sm leading-relaxed mb-4">Fuel beauty from within — the ingredient that changes everything.</p>
+          <a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="blog-card fade-up d1">
+        <div class="bi" style="height:190px;position:relative;">
+          <div style="height:190px;background:linear-gradient(135deg,#D0E8C8,#A0C878);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:60px;opacity:.4;">🌿</span>
+          </div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.25) 0%,transparent 60%);"></div>
+          <div class="absolute bottom-3 left-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full" style="background:rgba(26,54,40,.85);color:#FDFBF4;font-size:9px;font-weight:600;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Nutrition Science</span></div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">The Benefits of Moringa You Need to Know</h4>
+          <p class="text-text-muted font-sans text-sm leading-relaxed mb-4">92 nutrients, 46 antioxidants. Why this tropical superfood earns its title.</p>
+          <a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+      <div class="blog-card fade-up d2">
+        <div class="bi" style="height:190px;position:relative;">
+          <div style="height:190px;background:linear-gradient(135deg,#C8D8F0,#90B0E0);display:flex;align-items:center;justify-content:center;">
+            <span style="font-size:60px;opacity:.4;">💧</span>
+          </div>
+          <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,.25) 0%,transparent 60%);"></div>
+          <div class="absolute bottom-3 left-4"><span class="inline-flex items-center px-2.5 py-1 rounded-full" style="background:rgba(26,54,40,.85);color:#FDFBF4;font-size:9px;font-weight:600;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Hydration &amp; Recovery</span></div>
+        </div>
+        <div class="p-5">
+          <h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">Electrolytes 101: Why Your Body Needs Them Daily</h4>
+          <p class="text-text-muted font-sans text-sm leading-relaxed mb-4">Most people are chronically dehydrated and don't know it. Here's how to fix that.</p>
+          <a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all">Read More <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== LEARN ===================== -->
-<section id="learn" class="py-20 bg-cream">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <div class="section-label mb-3 fade-up">The TROPICAL Journal</div>
-      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-text-dark fade-up fade-up-delay-1">Learn to Live Better</h2>
-      <p class="text-text-muted mt-3 font-sans fade-up fade-up-delay-2" style="font-size:15px;">Ingredient science, wellness rituals, and lifestyle advice — made simple.</p>
-    </div>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="blog-card fade-up">
-        <div class="blog-img" style="height:200px; position:relative; overflow:hidden;"><div style="height:200px; background:linear-gradient(135deg,#E8D0B8,#C8A878); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:52px; opacity:0.35; user-select:none;">☕</div>
-          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%);"></div>
-        </div><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Beauty &amp; Glow</span></div></div>
-        <div class="p-5"><h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">Why Collagen Matters For Your Skin &amp; Hair</h4><p class="text-text-muted font-sans text-sm leading-relaxed mb-4">The ingredient that changes everything — and why tropical sources absorb better.</p><a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
-      </div>
-      <div class="blog-card fade-up fade-up-delay-1">
-        <div class="blog-img" style="height:200px; position:relative; overflow:hidden;"><div style="height:200px; background:linear-gradient(135deg,#D0E8C8,#A0C878); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:52px; opacity:0.35; user-select:none;">🌿</div>
-          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%);"></div>
-        </div><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Nutrition Science</span></div></div>
-        <div class="p-5"><h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">The Benefits of Moringa You Need to Know</h4><p class="text-text-muted font-sans text-sm leading-relaxed mb-4">92 nutrients, 46 antioxidants. Why this tropical superfood earns its title.</p><a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
-      </div>
-      <div class="blog-card fade-up fade-up-delay-2">
-        <div class="blog-img" style="height:200px; position:relative; overflow:hidden;"><div style="height:200px; background:linear-gradient(135deg,#C8D8F0,#90B0E0); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;">
-          <div style="font-size:52px; opacity:0.35; user-select:none;">💧</div>
-          <div class="absolute inset-0" style="background:linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%);"></div>
-        </div><div class="absolute bottom-4 left-4"><span class="pill" style="background:rgba(26,54,40,0.85); color:#FDFBF4; font-size:9px;">Hydration &amp; Recovery</span></div></div>
-        <div class="p-5"><h4 class="font-serif font-semibold text-text-dark text-base mb-2 leading-snug">Electrolytes 101: Why Your Body Needs Them Daily</h4><p class="text-text-muted font-sans text-sm leading-relaxed mb-4">Most people are chronically dehydrated and don't know it. Here's how to fix that.</p><a href="#" class="font-sans font-semibold text-forest text-sm flex items-center gap-1.5 hover:gap-3 transition-all cursor-pointer">Read More <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===================== NEWSLETTER ===================== -->
+<!-- ===== NEWSLETTER ===== -->
 <section class="py-20 relative overflow-hidden" style="background:linear-gradient(135deg,#1A3628 0%,#2D5A3D 60%,#1A3628 100%);">
-  <div class="absolute -right-20 top-0 bottom-0 opacity-5 pointer-events-none"><svg width="300" height="100%" viewBox="0 0 200 400" preserveAspectRatio="xMidYMid slice"><path d="M100 10 C100 10 190 80 190 200 C190 320 100 390 100 390 C100 390 10 320 10 200 C10 80 100 10 100 10Z" fill="#FDFBF4"/></svg></div>
-  <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center relative z-10">
-    <div class="mb-4 fade-up" style="font-family:'Raleway',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(196,124,43,0.9);">Join the Community</div>
-    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-cream mb-3 fade-up fade-up-delay-1">The Ritual Starts Here.</h2>
-    <p class="text-cream/60 font-sans mb-8 fade-up fade-up-delay-2" style="font-size:15px; line-height:1.8;">Be the first to discover new products, exclusive offers, and the wellness education that makes the difference between trying and truly transforming.</p>
-    <form class="flex flex-col sm:flex-row gap-3 mb-4 fade-up fade-up-delay-3" onsubmit="return false;">
-      <input type="email" placeholder="Enter your email address" class="input-email flex-1" aria-label="Email address">
-      <button type="submit" class="btn-primary btn-gold btn-shimmer flex-shrink-0">Join TROPICAL</button>
+  <div class="absolute inset-0 pointer-events-none opacity-10">
+    <div style="position:absolute;top:-20%;right:-10%;width:400px;height:400px;border-radius:50%;border:1px solid rgba(253,251,244,.3);"></div>
+    <div style="position:absolute;bottom:-30%;left:-5%;width:500px;height:500px;border-radius:50%;border:1px solid rgba(253,251,244,.2);"></div>
+  </div>
+  <!-- Ingredient decoration -->
+  <div class="absolute right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-3 opacity-30">
+    <span style="font-size:32px;">🌿</span><span style="font-size:28px;">🫐</span><span style="font-size:32px;">☕</span>
+  </div>
+  <div class="max-w-xl mx-auto px-4 sm:px-6 text-center relative z-10">
+    <div class="label mb-4 fade-up" style="color:rgba(196,124,43,.9);">Join the Community</div>
+    <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-cream mb-3 fade-up d1">Be the first to know.</h2>
+    <p class="text-cream/60 font-sans mb-8 fade-up d2" style="font-size:15px;line-height:1.8;">Exclusive offers, new product launches, wellness tips and more.</p>
+    <form class="flex flex-col sm:flex-row gap-3 mb-4 fade-up d3" onsubmit="return false;">
+      <input type="email" placeholder="Enter your email address" class="flex-1 rounded-lg px-5 py-3.5 font-sans text-sm outline-none" style="background:rgba(253,251,244,.1);border:1.5px solid rgba(253,251,244,.25);color:#FDFBF4;font-family:'Raleway',sans-serif;" aria-label="Email">
+      <button type="submit" class="btn btn-gold flex-shrink-0">Subscribe</button>
     </form>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up fade-up-delay-4">
-      <span class="flex items-center gap-1.5 text-cream/50 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No spam, ever</span>
-      <span class="flex items-center gap-1.5 text-cream/50 font-sans text-xs"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Unsubscribe anytime</span>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-up d4">
+      <span class="flex items-center gap-1.5 text-cream/50 font-sans text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No spam, ever</span>
+      <span class="flex items-center gap-1.5 text-cream/50 font-sans text-xs"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Unsubscribe anytime</span>
     </div>
   </div>
 </section>
 
-<!-- ===================== FOOTER ===================== -->
-<footer style="background:#111A0E;" class="pt-16 pb-8">
+<!-- ===== FOOTER ===== -->
+<footer style="background:#0E1509;" class="pt-16 pb-8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b" style="border-color:rgba(253,251,244,0.08);">
+    <div class="grid grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b" style="border-color:rgba(253,251,244,.07);">
       <div class="col-span-2 lg:col-span-2">
         <div class="flex items-center gap-2.5 mb-4">
-          <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#2D5A3D"/><path d="M18 28 C18 28 10 22 10 16 C10 11.5 13.5 8 18 8 C22.5 8 26 11.5 26 16 C26 22 18 28 18 28Z" fill="#FDFBF4" opacity="0.9"/><path d="M18 15 L18 26" stroke="#2D5A3D" stroke-width="1.5" stroke-linecap="round"/><path d="M15 18 L18 15 L21 18" stroke="#2D5A3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <div><div class="font-serif text-cream font-semibold text-lg leading-tight">tropical</div><div class="text-cream/40 leading-tight" style="font-size:9px; letter-spacing:0.12em; text-transform:uppercase; font-family:'Raleway',sans-serif;">Wellness You'll Actually Love</div></div>
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="18" r="18" fill="#2D5A3D"/><path d="M18 28C18 28 10 22 10 16c0-4.5 3.5-8 8-8s8 3.5 8 8c0 6-8 12-8 12Z" fill="#FDFBF4" opacity=".9"/><path d="M18 15v11M15 18l3-3 3 3" stroke="#2D5A3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><div class="font-serif text-cream font-semibold text-lg leading-tight">tropical</div><div class="text-cream/40 leading-tight" style="font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;font-family:'Raleway',sans-serif;">Wellness Inspired by Nature</div></div>
         </div>
         <p class="text-cream/50 font-sans text-sm leading-relaxed mb-6 max-w-xs">A premium wellness lifestyle brand built on one belief: health should never feel like a punishment.</p>
         <div class="flex items-center gap-4">
-          <a href="#" class="text-cream/40 hover:text-cream transition-colors cursor-pointer" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="#" class="text-cream/40 hover:text-cream transition-colors cursor-pointer" aria-label="Facebook"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-          <a href="#" class="text-cream/40 hover:text-cream transition-colors cursor-pointer" aria-label="TikTok"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color:rgba(253,251,244,0.4);"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
-          <a href="#" class="text-cream/40 hover:text-cream transition-colors cursor-pointer" aria-label="YouTube"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor"/></svg></a>
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="Facebook"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="TikTok"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" style="color:rgba(253,251,244,.4);"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/></svg></a>
+          <a href="#" class="text-cream/40 hover:text-cream transition-colors" aria-label="Pinterest"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.5 2 2 6.5 2 12c0 4.2 2.6 7.8 6.3 9.3-.1-.8-.1-2 .2-2.9.3-1 1.9-8.1 1.9-8.1s-.5-1-.5-2.4c0-2.3 1.3-4 3.3-4 1.5 0 2.3 1.1 2.3 2.5 0 1.5-.9 3.7-1.4 5.8-.4 1.7.8 3.1 2.5 3.1 3 0 5-3.2 5-7.7C21.6 8.2 18.3 5 13.8 5 8.7 5 5.7 8.9 5.7 12.8c0 1.4.5 2.9 1.3 3.7.1.1.1.3.1.4l-.5 2c-.1.2-.3.3-.5.2C3.9 18 2 15.2 2 12 2 6.5 6.5 2 12 2z"/></svg></a>
         </div>
       </div>
       <div>
         <h5 class="text-cream font-sans font-bold text-xs uppercase tracking-widest mb-4">Shop</h5>
-        <ul class="space-y-3">
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">All Products</a></li>
-          <li><a href="#goals" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Shop by Goal</a></li>
-          <li><a href="#bestsellers" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Best Sellers</a></li>
-          <li><a href="#bundles" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Bundles &amp; Offers</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">New Arrivals</a></li>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">All Products</a></li>
+          <li><a href="#goals" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Shop by Goal</a></li>
+          <li><a href="#bestsellers" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Best Sellers</a></li>
+          <li><a href="#bundles" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Bundles &amp; Offers</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">New Arrivals</a></li>
         </ul>
       </div>
       <div>
-        <h5 class="text-cream font-sans font-bold text-xs uppercase tracking-widest mb-4">Customer Care</h5>
-        <ul class="space-y-3">
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Shipping &amp; Delivery</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Returns &amp; Refunds</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">FAQ</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Track Your Order</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Contact Us</a></li>
+        <h5 class="text-cream font-sans font-bold text-xs uppercase tracking-widest mb-4">Help</h5>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Shipping &amp; Delivery</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Returns &amp; Refunds</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">FAQ</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Track Your Order</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Contact Us</a></li>
         </ul>
       </div>
       <div>
         <h5 class="text-cream font-sans font-bold text-xs uppercase tracking-widest mb-4">Company</h5>
-        <ul class="space-y-3">
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">About TROPICAL</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Our Ingredients</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Sustainability</a></li>
-          <li><a href="#learn" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Journal</a></li>
-          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors cursor-pointer">Reviews</a></li>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">About Us</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Ingredients</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Sustainability</a></li>
+          <li><a href="#learn" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Blog</a></li>
+          <li><a href="#" class="text-cream/50 hover:text-cream/80 font-sans text-sm transition-colors">Reviews</a></li>
         </ul>
       </div>
     </div>
-    <div class="py-8 border-b flex flex-col sm:flex-row items-center justify-center gap-8" style="border-color:rgba(253,251,244,0.06);">
-      <div class="flex items-center gap-2 text-cream/40 font-sans text-xs"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>100% Secure Payment</div>
-      <div class="flex items-center gap-2 text-cream/40 font-sans text-xs"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>30-Day Money Back Guarantee</div>
-      <div class="flex items-center gap-2 text-cream/40 font-sans text-xs"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>USDA Certified Organic</div>
+    <div class="py-6 border-b flex flex-wrap items-center justify-center gap-6" style="border-color:rgba(253,251,244,.05);">
+      <div class="flex items-center gap-2 text-cream/35 font-sans text-xs"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>100% Secure Payment</div>
+      <div class="flex items-center gap-2 text-cream/35 font-sans text-xs"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>30-Day Money Back Guarantee</div>
+      <div class="flex items-center gap-2 text-cream/35 font-sans text-xs"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Premium Quality Products</div>
     </div>
     <div class="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <p class="text-cream/30 font-sans text-xs">&copy; 2024 TROPICAL Wellness. All rights reserved.</p>
+      <p class="text-cream/25 font-sans text-xs">&copy; 2024 TROPICAL Wellness. All rights reserved.</p>
       <div class="flex items-center gap-4">
-        <a href="#" class="text-cream/30 hover:text-cream/60 font-sans text-xs transition-colors cursor-pointer">Terms &amp; Conditions</a>
+        <a href="#" class="text-cream/25 hover:text-cream/50 font-sans text-xs transition-colors">Terms &amp; Conditions</a>
         <span class="text-cream/20">|</span>
-        <a href="#" class="text-cream/30 hover:text-cream/60 font-sans text-xs transition-colors cursor-pointer">Privacy Policy</a>
+        <a href="#" class="text-cream/25 hover:text-cream/50 font-sans text-xs transition-colors">Privacy Policy</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-  // Fade-up scroll observer
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  // Progress bar
+  const prog = document.getElementById('prog');
+  // Fade-up observer
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-  // Sticky nav + scroll progress + parallax blobs
+  // Nav + progress + parallax
   const nav = document.getElementById('main-nav');
-  const progressBar = document.getElementById('scroll-progress');
-  const blobs = document.querySelectorAll('.hero-blob');
+  const heroBg = document.querySelector('#goals');
   window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    nav.classList.toggle('scrolled', scrollY > 60);
-    // Scroll progress
-    const docH = document.documentElement.scrollHeight - window.innerHeight;
-    progressBar.style.width = (docH > 0 ? (scrollY / docH) * 100 : 0) + '%';
-    // Parallax blobs
-    if (scrollY < window.innerHeight) {
-      blobs.forEach((b, i) => {
-        const speed = i % 2 === 0 ? 0.12 : -0.08;
-        b.style.transform = `translateY(${scrollY * speed}px)`;
-      });
-    }
+    const sy = window.scrollY;
+    nav.classList.toggle('scrolled', sy > 60);
+    const dh = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (dh > 0 ? sy / dh * 100 : 0) + '%';
   }, { passive: true });
 
   // Mobile menu
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const closeMenu = document.getElementById('close-menu');
-  hamburger.addEventListener('click', () => { mobileMenu.classList.remove('hidden'); document.body.style.overflow = 'hidden'; });
-  closeMenu.addEventListener('click', closeMobileMenu);
-  function closeMobileMenu() { mobileMenu.classList.add('hidden'); document.body.style.overflow = ''; }
-  mobileMenu.addEventListener('click', (e) => { if (e.target === mobileMenu) closeMobileMenu(); });
+  const mm = document.getElementById('mobile-menu');
+  document.getElementById('hamburger').addEventListener('click', () => { mm.classList.remove('hidden'); document.body.style.overflow = 'hidden'; });
+  document.getElementById('close-menu').addEventListener('click', closeMM);
+  function closeMM() { mm.classList.add('hidden'); document.body.style.overflow = ''; }
+  mm.addEventListener('click', e => { if (e.target === mm) closeMM(); });
 
-  // Add to Cart micro-interaction with ripple
+  // Add to Cart
   document.querySelectorAll('button').forEach(btn => {
     if (btn.textContent.trim() === 'Add to Cart') {
       btn.addEventListener('click', function(e) {
-        // Ripple
-        const ripple = document.createElement('span');
-        const rect = this.getBoundingClientRect();
-        ripple.style.cssText = `position:absolute;border-radius:50%;background:rgba(255,255,255,0.3);width:60px;height:60px;top:${e.clientY-rect.top-30}px;left:${e.clientX-rect.left-30}px;transform:scale(0);animation:ripple 0.5s ease-out forwards;pointer-events:none;`;
-        this.style.position = 'relative';
-        this.style.overflow = 'hidden';
-        this.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-        // Text change
+        const rip = document.createElement('span');
+        const r = this.getBoundingClientRect();
+        rip.style.cssText = `position:absolute;border-radius:50%;background:rgba(255,255,255,.28);width:60px;height:60px;top:${e.clientY-r.top-30}px;left:${e.clientX-r.left-30}px;transform:scale(0);animation:ripple .5s ease-out forwards;pointer-events:none;`;
+        this.appendChild(rip);
+        setTimeout(() => rip.remove(), 600);
         const orig = this.textContent;
         this.textContent = '✓ Added!';
-        this.style.background = '#2D5A3D';
+        this.style.background = '#1A3628';
         setTimeout(() => { this.textContent = orig; this.style.background = ''; }, 1600);
       });
     }
   });
 
-  // Animate elements already in view on load
+  // Animate visible elements on load
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.fade-up').forEach((el, i) => {
       if (el.getBoundingClientRect().top < window.innerHeight) {
-        setTimeout(() => el.classList.add('visible'), i * 60);
+        setTimeout(() => el.classList.add('visible'), i * 55);
       }
     });
   });
 </script>
-<style>
-  @keyframes ripple { to { transform: scale(4); opacity: 0; } }
-</style>
+<style>@keyframes ripple{to{transform:scale(4);opacity:0;}}</style>
 </body>
 </html>
