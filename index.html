@@ -75,11 +75,6 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 .prod-card:hover .img-wrap>div{transform:scale(1.06);}
 
 /* Pouch mockup */
-.pouch{position:relative;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:12px;box-shadow:0 8px 32px rgba(0,0,0,.28);}
-.pouch::before{content:'';position:absolute;top:0;left:22%;width:16%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.06) 50%,rgba(255,255,255,.16));border-radius:2px;z-index:2;pointer-events:none;}
-.pouch::after{content:'';position:absolute;top:0;right:18%;width:7%;height:100%;background:rgba(0,0,0,.15);z-index:2;pointer-events:none;}
-.pouch-label{font-family:'Raleway',sans-serif;font-weight:800;font-size:7px;color:#fff;text-align:center;letter-spacing:.08em;line-height:1.3;z-index:3;position:relative;}
-
 /* Goal cards */
 .goal-card{border-radius:16px;overflow:hidden;position:relative;cursor:pointer;transition:transform .35s,box-shadow .35s;}
 .goal-card:hover{transform:translateY(-5px);box-shadow:0 28px 60px rgba(0,0,0,.28);}
@@ -116,23 +111,9 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 .snap-x{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;}
 .snap-x>*{scroll-snap-align:start;}
 
-/* Real packaging mockups */
-.pkg{position:relative;display:flex;flex-direction:column;align-items:center;border-radius:10px 10px 8px 8px;overflow:visible;filter:drop-shadow(0 20px 40px rgba(0,0,0,.55));}
-/* Pouch body */
-.pkg-body{position:relative;background:#111;border-radius:10px 10px 8px 8px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:space-between;}
-/* Zip strip at top */
-.pkg-zip{width:100%;height:8%;background:linear-gradient(180deg,#2a2a2a,#1a1a1a);border-radius:10px 10px 0 0;position:relative;flex-shrink:0;}
-.pkg-zip::before{content:'';position:absolute;left:10%;right:10%;top:35%;height:2px;background:rgba(255,255,255,.08);border-radius:2px;}
-.pkg-zip::after{content:'COMMITTED TO PREMIUM QUALITY PRODUCTS';position:absolute;bottom:4px;left:0;right:0;text-align:center;font-size:4px;font-family:'Raleway',sans-serif;font-weight:600;letter-spacing:.15em;color:rgba(255,255,255,.35);text-transform:uppercase;}
-/* Gloss highlight on pouch */
-.pkg-body::after{content:'';position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.09) 0%,rgba(255,255,255,.04) 40%,rgba(255,255,255,.07) 100%);border-radius:0 0 2px 2px;pointer-events:none;z-index:10;}
-/* Side shadow */
-.pkg-body::before{content:'';position:absolute;top:0;right:10%;width:8%;height:100%;background:rgba(0,0,0,.3);pointer-events:none;z-index:10;}
-/* Circle label */
-.pkg-circle{position:relative;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
-.pkg-circle-inner{position:absolute;inset:12%;border-radius:50%;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-/* Bottom info strip */
-.pkg-bottom{width:100%;text-align:center;font-family:'Raleway',sans-serif;color:rgba(255,255,255,.65);flex-shrink:0;}
+/* Real product image assets */
+.prod-photo{display:block;height:auto;object-fit:contain;}
+.hero-photo{display:block;height:auto;object-fit:contain;filter:drop-shadow(0 22px 42px rgba(0,0,0,.55));}
 
 @media(prefers-reduced-motion:reduce){.fade-up{opacity:1;transform:none;}*{animation:none!important;transition:none!important;}}
 @keyframes ripple{to{transform:scale(4);opacity:0;}}
@@ -278,95 +259,29 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
             <!-- Moringa — back left, slightly angled -->
             <div style="position:absolute;bottom:18%;left:3%;transform:rotate(-8deg) translateY(-8px);z-index:2;">
-              <div class="pkg" style="width:90px;height:118px;">
-                <div class="pkg-body" style="width:100%;height:100%;padding:6% 5% 8%;">
-                  <div class="pkg-zip" style="width:110%;margin-left:-5%;"></div>
-                  <!-- Circle label: green ring -->
-                  <div style="position:relative;width:62px;height:62px;border-radius:50%;background:conic-gradient(#2D8A20 0%,#5ABA30 40%,#3A9A25 70%,#2D8A20 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:2px auto;">
-                    <div style="position:absolute;inset:14%;border-radius:50%;background:#0f0f0f;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;">
-                      <div style="font-family:'Lora',serif;font-weight:700;font-size:7px;color:#fff;text-align:center;line-height:1.15;letter-spacing:.02em;">ORGANIC<br>MORINGA</div>
-                      <div style="font-family:'Lora',serif;font-size:4.5px;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-top:1px;">POWDER</div>
-                      <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.7);font-style:italic;margin-top:2px;">tropical®</div>
-                    </div>
-                  </div>
-                  <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.08em;margin-top:3px;">200g | 7oz</div>
-                </div>
-              </div>
+              <img src="assets/products/organic-moringa.png" alt="Tropical Organic Moringa" class="hero-photo" style="width:90px;">
             </div>
 
             <!-- Acai — back right, slightly angled -->
             <div style="position:absolute;bottom:18%;right:3%;transform:rotate(7deg) translateY(-6px);z-index:2;">
-              <div class="pkg" style="width:90px;height:118px;">
-                <div class="pkg-body" style="width:100%;height:100%;padding:6% 5% 8%;">
-                  <div class="pkg-zip" style="width:110%;margin-left:-5%;"></div>
-                  <!-- Circle label: purple ring -->
-                  <div style="position:relative;width:62px;height:62px;border-radius:50%;background:conic-gradient(#7A20A0 0%,#B040E0 40%,#8A28B0 70%,#7A20A0 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:2px auto;">
-                    <div style="position:absolute;inset:14%;border-radius:50%;background:#0f0f0f;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;">
-                      <div style="font-family:'Lora',serif;font-weight:700;font-size:7px;color:#fff;text-align:center;line-height:1.15;letter-spacing:.02em;">ORGANIC<br>ACAI</div>
-                      <div style="font-family:'Lora',serif;font-size:4.5px;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-top:1px;">POWDER</div>
-                      <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.7);font-style:italic;margin-top:2px;">tropical®</div>
-                    </div>
-                  </div>
-                  <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.08em;margin-top:3px;">200g | 7oz</div>
-                </div>
-              </div>
+              <img src="assets/products/organic-acai.png" alt="Tropical Organic Acai" class="hero-photo" style="width:90px;">
             </div>
 
             <!-- Matcha — back center -->
             <div style="position:absolute;bottom:24%;left:50%;transform:translateX(-50%) translateY(-10px);z-index:3;">
-              <div class="pkg" style="width:100px;height:132px;">
-                <div class="pkg-body" style="width:100%;height:100%;padding:6% 5% 8%;">
-                  <div class="pkg-zip" style="width:110%;margin-left:-5%;"></div>
-                  <!-- Circle label: gold-green ring -->
-                  <div style="position:relative;width:70px;height:70px;border-radius:50%;background:conic-gradient(#C47C2B 0%,#E8A84A 25%,#7AB830 55%,#4A9820 75%,#C47C2B 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:2px auto;">
-                    <div style="position:absolute;inset:13%;border-radius:50%;background:#0f0f0f;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;">
-                      <div style="font-family:'Lora',serif;font-weight:700;font-size:7.5px;color:#fff;text-align:center;line-height:1.15;letter-spacing:.02em;">MUSHROOM<br>MATCHA</div>
-                      <div style="font-family:'Lora',serif;font-size:4.5px;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-top:1px;">POWDER</div>
-                      <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.7);font-style:italic;margin-top:2px;">tropical®</div>
-                    </div>
-                  </div>
-                  <div style="font-family:'Raleway',sans-serif;font-size:3.5px;color:rgba(255,255,255,.45);text-align:center;letter-spacing:.06em;margin-top:2px;line-height:1.4;">Balanced Energy | Brain Health<br>180g | 6.4oz</div>
-                </div>
-              </div>
+              <img src="assets/products/mushroom-matcha.png" alt="Tropical Mushroom Matcha" class="hero-photo" style="width:100px;">
             </div>
 
             <!-- Front row: Slim Coffee (left front) + Hydration (right front) -->
 
             <!-- Slim Coffee — front left, hero position, largest -->
             <div style="position:absolute;bottom:4%;left:5%;z-index:5;">
-              <div class="pkg" style="width:120px;height:158px;">
-                <div class="pkg-body" style="width:100%;height:100%;padding:6% 5% 7%;">
-                  <div class="pkg-zip" style="width:110%;margin-left:-5%;"></div>
-                  <!-- Circle label: gold ring -->
-                  <div style="position:relative;width:82px;height:82px;border-radius:50%;background:conic-gradient(#B06820 0%,#E8A84A 30%,#C47C2B 60%,#F4C060 80%,#B06820 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:3px auto;box-shadow:0 0 20px rgba(196,124,43,.35);">
-                    <div style="position:absolute;inset:12%;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:5px;">
-                      <div style="font-family:'Lora',serif;font-weight:700;font-size:9px;color:#fff;text-align:center;line-height:1.15;letter-spacing:.02em;">SLIM<br>COFFEE</div>
-                      <div style="font-family:'Lora',serif;font-size:5px;color:rgba(255,255,255,.5);letter-spacing:.05em;margin-top:1px;">POWDER</div>
-                      <div style="font-family:'Raleway',sans-serif;font-size:5px;color:rgba(255,255,255,.75);font-style:italic;margin-top:2px;">tropical®</div>
-                    </div>
-                  </div>
-                  <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.05em;margin-top:4px;line-height:1.5;">Garcinia | Fiber | B Vitamins</div>
-                  <div style="font-family:'Raleway',sans-serif;font-size:3.5px;color:#C47C2B;text-align:center;letter-spacing:.08em;margin-top:2px;font-weight:700;">CONQUER THE DAY</div>
-                </div>
-              </div>
+              <img src="assets/products/slim-coffee.png" alt="Tropical Slim Coffee" class="hero-photo" style="width:120px;">
             </div>
 
             <!-- Hydration — front right -->
             <div style="position:absolute;bottom:4%;right:5%;z-index:5;">
-              <div class="pkg" style="width:108px;height:142px;">
-                <div class="pkg-body" style="width:100%;height:100%;padding:6% 5% 7%;">
-                  <div class="pkg-zip" style="width:110%;margin-left:-5%;"></div>
-                  <!-- Circle label: teal/blue ring -->
-                  <div style="position:relative;width:74px;height:74px;border-radius:50%;background:conic-gradient(#0A5A8A 0%,#1A8AC0 35%,#0A7AB0 65%,#0A5A8A 100%);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:2px auto;">
-                    <div style="position:absolute;inset:13%;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;">
-                      <div style="font-family:'Lora',serif;font-weight:700;font-size:7px;color:#fff;text-align:center;line-height:1.15;letter-spacing:.02em;">HYDRATION<br>COFFEE</div>
-                      <div style="font-family:'Lora',serif;font-size:4.5px;color:rgba(255,255,255,.5);letter-spacing:.04em;margin-top:1px;">POWDER</div>
-                      <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.7);font-style:italic;margin-top:2px;">tropical®</div>
-                    </div>
-                  </div>
-                  <div style="font-family:'Raleway',sans-serif;font-size:3.5px;color:rgba(255,255,255,.5);text-align:center;letter-spacing:.06em;margin-top:3px;line-height:1.4;">Electrolytes | Hydration<br>312g | 11oz</div>
-                </div>
-              </div>
+              <img src="assets/products/hydration-coffee.png" alt="Tropical Hydration Coffee &amp; Electrolytes" class="hero-photo" style="width:108px;">
             </div>
 
             <!-- Drink glass: matcha green drink -->
@@ -448,9 +363,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
           </div>
           <div>
             <div class="pouch-wrap flex justify-center mb-3">
-              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#9B6040,#5A3015);">
-                <span class="pouch-label">SLIM<br>COFFEE</span>
-              </div>
+              <img src="assets/products/slim-coffee.png" alt="Tropical Slim Coffee" class="prod-photo" style="width:56px;">
             </div>
             <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Slim Coffee</a>
           </div>
@@ -475,9 +388,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
           </div>
           <div>
             <div class="pouch-wrap flex justify-center mb-3">
-              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#9B4070,#5A1A3A);">
-                <span class="pouch-label">BEAUTY<br>COFFEE</span>
-              </div>
+              <img src="assets/products/beauty-coffee.png" alt="Tropical Beauty Coffee" class="prod-photo" style="width:56px;">
             </div>
             <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Beauty</a>
           </div>
@@ -502,9 +413,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
           </div>
           <div>
             <div class="pouch-wrap flex justify-center mb-3">
-              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#508030,#203810);">
-                <span class="pouch-label">MUSHROOM<br>MATCHA</span>
-              </div>
+              <img src="assets/products/mushroom-matcha.png" alt="Tropical Mushroom Matcha" class="prod-photo" style="width:56px;">
             </div>
             <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Energy</a>
           </div>
@@ -529,9 +438,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
           </div>
           <div>
             <div class="pouch-wrap flex justify-center mb-3">
-              <div class="pouch" style="width:48px;height:64px;background:linear-gradient(160deg,#2A6A8A,#103050);">
-                <span class="pouch-label">HYDRATION<br>COFFEE</span>
-              </div>
+              <img src="assets/products/hydration-coffee.png" alt="Tropical Hydration Coffee &amp; Electrolytes" class="prod-photo" style="width:56px;">
             </div>
             <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Hydration</a>
           </div>
@@ -557,9 +464,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
             <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Moringa</a>
           </div>
           <div class="pouch-wrap ml-auto">
-            <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#506A20,#304010);">
-              <span class="pouch-label">ORGANIC<br>MORINGA</span>
-            </div>
+            <img src="assets/products/organic-moringa.png" alt="Tropical Organic Moringa" class="prod-photo" style="width:52px;">
           </div>
         </div>
       </div>
@@ -579,9 +484,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
             <a href="#" class="btn btn-sm btn-outline-w" style="font-size:9px;padding:8px 14px;display:inline-flex;">Shop Acai</a>
           </div>
           <div class="pouch-wrap ml-auto">
-            <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#7A5090,#3A2050);">
-              <span class="pouch-label">ORGANIC<br>ACAI</span>
-            </div>
+            <img src="assets/products/organic-acai.png" alt="Tropical Organic Acai" class="prod-photo" style="width:52px;">
           </div>
         </div>
       </div>
@@ -600,27 +503,8 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <!-- Slim Coffee -->
       <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up">
-        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#1a1208,#2a1c0a,#1a1208);aspect-ratio:3/4;">
-          <!-- Real black pouch mockup -->
-          <div style="width:68%;aspect-ratio:3/4;background:#111;border-radius:8px 8px 6px 6px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,.6),inset 2px 0 8px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:8% 6%;">
-            <div style="width:104%;margin-left:-4%;height:12%;background:linear-gradient(180deg,#222,#181818);border-radius:8px 8px 0 0;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03) 50%,rgba(255,255,255,.06));border-radius:2px;"></div>
-            <div style="position:absolute;top:0;right:10%;width:7%;height:100%;background:rgba(0,0,0,.25);"></div>
-            <div style="width:70%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#B06820 0%,#E8A84A 30%,#C47C2B 60%,#F4C060 80%,#B06820 100%);display:flex;align-items:center;justify-content:center;margin-top:14%;box-shadow:0 0 16px rgba(196,124,43,.3);">
-              <div style="position:absolute;width:calc(70% * 0.74);aspect-ratio:1;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <div style="font-family:'Lora',serif;font-weight:700;font-size:8px;color:#fff;text-align:center;line-height:1.2;">SLIM<br>COFFEE</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4.5px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.04em;">POWDER</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.65);font-style:italic;margin-top:1px;">tropical®</div>
-              </div>
-            </div>
-            <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.07em;margin-top:auto;padding-bottom:4px;">Garcinia | Fiber | B Vitamins</div>
-          </div>
-          <!-- Coffee bean ingredients scattered -->
-          <div style="position:absolute;bottom:8px;left:6px;display:flex;gap:2px;flex-wrap:wrap;width:30px;">
-            <div style="width:8px;height:5px;background:#3A2010;border-radius:50%;transform:rotate(-15deg);opacity:.8;"></div>
-            <div style="width:8px;height:5px;background:#2A1508;border-radius:50%;transform:rotate(20deg);opacity:.7;"></div>
-            <div style="width:8px;height:5px;background:#3A2010;border-radius:50%;transform:rotate(-5deg);opacity:.75;"></div>
-          </div>
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#FAF8F2,#EDE6D8);aspect-ratio:3/4;">
+          <img src="assets/products/slim-coffee.png" alt="Tropical Slim Coffee" class="prod-photo" style="width:80%;">
           <div class="absolute top-2 right-2 text-white rounded-full px-2 py-0.5 font-bold" style="background:#C47C2B;font-size:7.5px;font-family:'Raleway',sans-serif;">BEST SELLER</div>
         </div></div>
         <div class="px-3 pb-4">
@@ -634,22 +518,8 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <!-- Beauty Coffee -->
       <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d1">
-        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#1a0810,#2a1020,#1a080e);aspect-ratio:3/4;">
-          <div style="width:68%;aspect-ratio:3/4;background:#111;border-radius:8px 8px 6px 6px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,.6),inset 2px 0 8px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:8% 6%;">
-            <div style="width:104%;margin-left:-4%;height:12%;background:linear-gradient(180deg,#222,#181818);border-radius:8px 8px 0 0;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03) 50%,rgba(255,255,255,.06));border-radius:2px;"></div>
-            <div style="position:absolute;top:0;right:10%;width:7%;height:100%;background:rgba(0,0,0,.25);"></div>
-            <div style="width:70%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#8B2060 0%,#C040A0 35%,#9A2870 65%,#8B2060 100%);display:flex;align-items:center;justify-content:center;margin-top:14%;">
-              <div style="position:absolute;width:calc(70% * 0.74);aspect-ratio:1;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <div style="font-family:'Lora',serif;font-weight:700;font-size:8px;color:#fff;text-align:center;line-height:1.2;">BEAUTY<br>COFFEE</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4.5px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.04em;">POWDER</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.65);font-style:italic;margin-top:1px;">tropical®</div>
-              </div>
-            </div>
-            <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.07em;margin-top:auto;padding-bottom:4px;">Collagen | Antioxidants</div>
-          </div>
-          <div style="position:absolute;bottom:8px;left:6px;font-size:13px;opacity:.7;">🌸</div>
-          <div style="position:absolute;bottom:8px;left:22px;font-size:11px;opacity:.6;">🫐</div>
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#FAF8F2,#F2E6EC);aspect-ratio:3/4;">
+          <img src="assets/products/beauty-coffee.png" alt="Tropical Beauty Coffee" class="prod-photo" style="width:80%;">
         </div></div>
         <div class="px-3 pb-4">
           <div class="text-xs font-semibold mb-0.5" style="color:#8B3060;font-family:'Raleway',sans-serif;">Beauty Coffee Powder</div>
@@ -662,23 +532,8 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <!-- Mushroom Matcha -->
       <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d2">
-        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#080f08,#101a10,#080f08);aspect-ratio:3/4;">
-          <div style="width:68%;aspect-ratio:3/4;background:#111;border-radius:8px 8px 6px 6px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,.6),inset 2px 0 8px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:8% 6%;">
-            <div style="width:104%;margin-left:-4%;height:12%;background:linear-gradient(180deg,#222,#181818);border-radius:8px 8px 0 0;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03) 50%,rgba(255,255,255,.06));border-radius:2px;"></div>
-            <div style="position:absolute;top:0;right:10%;width:7%;height:100%;background:rgba(0,0,0,.25);"></div>
-            <div style="width:70%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#C47C2B 0%,#E8A84A 25%,#7AB830 55%,#4A9820 75%,#C47C2B 100%);display:flex;align-items:center;justify-content:center;margin-top:14%;box-shadow:0 0 14px rgba(90,160,40,.25);">
-              <div style="position:absolute;width:calc(70% * 0.74);aspect-ratio:1;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <div style="font-family:'Lora',serif;font-weight:700;font-size:7px;color:#fff;text-align:center;line-height:1.2;">MUSHROOM<br>MATCHA</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4.5px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.04em;">POWDER</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.65);font-style:italic;margin-top:1px;">tropical®</div>
-              </div>
-            </div>
-            <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.07em;margin-top:auto;padding-bottom:4px;">Lion's Mane | Ceremonial Grade</div>
-          </div>
-          <!-- Matcha powder spill -->
-          <div style="position:absolute;bottom:6px;right:6px;width:24px;height:8px;background:radial-gradient(ellipse,rgba(90,160,40,.6) 0%,transparent 70%);border-radius:50%;filter:blur(1px);"></div>
-          <div style="position:absolute;bottom:8px;right:8px;font-size:11px;opacity:.6;">🍵</div>
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#FAF8F2,#E8F0E0);aspect-ratio:3/4;">
+          <img src="assets/products/mushroom-matcha.png" alt="Tropical Mushroom Matcha" class="prod-photo" style="width:80%;">
         </div></div>
         <div class="px-3 pb-4">
           <div class="text-xs font-semibold mb-0.5" style="color:#2D5A3D;font-family:'Raleway',sans-serif;">Mushroom Matcha Powder</div>
@@ -691,20 +546,8 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <!-- Hydration -->
       <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d3">
-        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#050e18,#0a1828,#050e18);aspect-ratio:3/4;">
-          <div style="width:68%;aspect-ratio:3/4;background:#111;border-radius:8px 8px 6px 6px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,.6),inset 2px 0 8px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:8% 6%;">
-            <div style="width:104%;margin-left:-4%;height:12%;background:linear-gradient(180deg,#222,#181818);border-radius:8px 8px 0 0;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03) 50%,rgba(255,255,255,.06));border-radius:2px;"></div>
-            <div style="position:absolute;top:0;right:10%;width:7%;height:100%;background:rgba(0,0,0,.25);"></div>
-            <div style="width:70%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#0A5A8A 0%,#1A8AC0 35%,#0A7AB0 65%,#0A5A8A 100%);display:flex;align-items:center;justify-content:center;margin-top:14%;">
-              <div style="position:absolute;width:calc(70% * 0.74);aspect-ratio:1;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <div style="font-family:'Lora',serif;font-weight:700;font-size:6.5px;color:#fff;text-align:center;line-height:1.2;">HYDRATION<br>COFFEE &amp;<br>ELECTROLYTES</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.65);font-style:italic;margin-top:2px;">tropical®</div>
-              </div>
-            </div>
-            <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.07em;margin-top:auto;padding-bottom:4px;">Electrolytes | Recovery</div>
-          </div>
-          <div style="position:absolute;bottom:8px;left:6px;font-size:11px;opacity:.6;">💧</div>
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#FAF8F2,#E0EEF5);aspect-ratio:3/4;">
+          <img src="assets/products/hydration-coffee.png" alt="Tropical Hydration Coffee &amp; Electrolytes" class="prod-photo" style="width:80%;">
         </div></div>
         <div class="px-3 pb-4">
           <div class="text-xs font-semibold mb-0.5" style="color:#0F3347;font-family:'Raleway',sans-serif;">Hydration Coffee &amp; Electrolytes</div>
@@ -717,21 +560,8 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <!-- Moringa -->
       <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d4">
-        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#080f08,#0f1a0f,#080f08);aspect-ratio:3/4;">
-          <div style="width:68%;aspect-ratio:3/4;background:#111;border-radius:8px 8px 6px 6px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,.6),inset 2px 0 8px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:8% 6%;">
-            <div style="width:104%;margin-left:-4%;height:12%;background:linear-gradient(180deg,#222,#181818);border-radius:8px 8px 0 0;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03) 50%,rgba(255,255,255,.06));border-radius:2px;"></div>
-            <div style="position:absolute;top:0;right:10%;width:7%;height:100%;background:rgba(0,0,0,.25);"></div>
-            <div style="width:70%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#1A7A10 0%,#4ABA20 40%,#2A9A15 70%,#1A7A10 100%);display:flex;align-items:center;justify-content:center;margin-top:14%;box-shadow:0 0 14px rgba(60,160,30,.25);">
-              <div style="position:absolute;width:calc(70% * 0.74);aspect-ratio:1;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <div style="font-family:'Lora',serif;font-weight:700;font-size:8px;color:#fff;text-align:center;line-height:1.2;">ORGANIC<br>MORINGA</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4.5px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.04em;">POWDER</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.65);font-style:italic;margin-top:1px;">tropical®</div>
-              </div>
-            </div>
-            <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.07em;margin-top:auto;padding-bottom:4px;">92 Nutrients | Pure &amp; Potent</div>
-          </div>
-          <div style="position:absolute;bottom:8px;left:6px;font-size:11px;opacity:.6;">🌿</div>
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#FAF8F2,#E6F0DC);aspect-ratio:3/4;">
+          <img src="assets/products/organic-moringa.png" alt="Tropical Organic Moringa" class="prod-photo" style="width:80%;">
         </div></div>
         <div class="px-3 pb-4">
           <div class="text-xs font-semibold mb-0.5" style="color:#506A20;font-family:'Raleway',sans-serif;">Organic Moringa Powder</div>
@@ -744,21 +574,8 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <!-- Acai -->
       <div class="prod-card flex-shrink-0 w-44 lg:w-auto fade-up d5">
-        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#0d0510,#1a0a20,#0d0510);aspect-ratio:3/4;">
-          <div style="width:68%;aspect-ratio:3/4;background:#111;border-radius:8px 8px 6px 6px;position:relative;box-shadow:0 12px 32px rgba(0,0,0,.6),inset 2px 0 8px rgba(255,255,255,.06);display:flex;flex-direction:column;align-items:center;justify-content:space-around;padding:8% 6%;">
-            <div style="width:104%;margin-left:-4%;height:12%;background:linear-gradient(180deg,#222,#181818);border-radius:8px 8px 0 0;position:absolute;top:0;left:0;"></div>
-            <div style="position:absolute;top:0;left:12%;width:14%;height:100%;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03) 50%,rgba(255,255,255,.06));border-radius:2px;"></div>
-            <div style="position:absolute;top:0;right:10%;width:7%;height:100%;background:rgba(0,0,0,.25);"></div>
-            <div style="width:70%;aspect-ratio:1;border-radius:50%;background:conic-gradient(#7A20A0 0%,#B040E0 40%,#8A28B0 70%,#7A20A0 100%);display:flex;align-items:center;justify-content:center;margin-top:14%;box-shadow:0 0 14px rgba(140,40,180,.25);">
-              <div style="position:absolute;width:calc(70% * 0.74);aspect-ratio:1;border-radius:50%;background:#0d0d0d;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-                <div style="font-family:'Lora',serif;font-weight:700;font-size:8px;color:#fff;text-align:center;line-height:1.2;">ORGANIC<br>ACAI</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4.5px;color:rgba(255,255,255,.5);margin-top:1px;letter-spacing:.04em;">POWDER</div>
-                <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.65);font-style:italic;margin-top:1px;">tropical®</div>
-              </div>
-            </div>
-            <div style="font-family:'Raleway',sans-serif;font-size:4px;color:rgba(255,255,255,.4);text-align:center;letter-spacing:.07em;margin-top:auto;padding-bottom:4px;">Antioxidants | Skin &amp; Recovery</div>
-          </div>
-          <div style="position:absolute;bottom:8px;left:6px;font-size:11px;opacity:.6;">🫐</div>
+        <div class="img-wrap p-2"><div class="rounded-xl flex items-center justify-center relative" style="background:linear-gradient(155deg,#FAF8F2,#EEE2F2);aspect-ratio:3/4;">
+          <img src="assets/products/organic-acai.png" alt="Tropical Organic Acai" class="prod-photo" style="width:80%;">
         </div></div>
         <div class="px-3 pb-4">
           <div class="text-xs font-semibold mb-0.5" style="color:#5A4070;font-family:'Raleway',sans-serif;">Organic Acai Powder</div>
@@ -807,7 +624,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <div class="ben-card fade-up">
         <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#7B4A2D,#3D1F0A);display:flex;align-items:center;justify-content:center;gap:10px;">
-          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#9B6040,#5A3015);"><span class="pouch-label">SLIM<br>COFFEE</span></div>
+          <img src="assets/products/slim-coffee.png" alt="Tropical Slim Coffee" class="prod-photo" style="height:78%;filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));">
           <div style="font-size:28px;opacity:.6;">☕</div>
         </div></div>
         <div class="p-5">
@@ -824,7 +641,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <div class="ben-card fade-up d1">
         <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#8B3060,#5C1A3A);display:flex;align-items:center;justify-content:center;gap:10px;">
-          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#A04070,#6A1840);"><span class="pouch-label">BEAUTY<br>COFFEE</span></div>
+          <img src="assets/products/beauty-coffee.png" alt="Tropical Beauty Coffee" class="prod-photo" style="height:78%;filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));">
           <div style="font-size:28px;opacity:.6;">🌸</div>
         </div></div>
         <div class="p-5">
@@ -841,7 +658,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <div class="ben-card fade-up d2">
         <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#3D7030,#1E4010);display:flex;align-items:center;justify-content:center;gap:10px;">
-          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#508030,#203810);"><span class="pouch-label">MUSHROOM<br>MATCHA</span></div>
+          <img src="assets/products/mushroom-matcha.png" alt="Tropical Mushroom Matcha" class="prod-photo" style="height:78%;filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));">
           <div style="font-size:28px;opacity:.6;">🍄</div>
         </div></div>
         <div class="p-5">
@@ -858,7 +675,7 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
 
       <div class="ben-card fade-up d3">
         <div class="p-1"><div class="rounded-xl" style="height:140px;background:linear-gradient(155deg,#1E5A7A,#0A3050);display:flex;align-items:center;justify-content:center;gap:10px;">
-          <div class="pouch" style="width:44px;height:58px;background:linear-gradient(160deg,#2A6A8A,#103050);"><span class="pouch-label" style="font-size:5.5px;">HYDRATION<br>COFFEE &<br>ELECTROLYTES</span></div>
+          <img src="assets/products/hydration-coffee.png" alt="Tropical Hydration Coffee &amp; Electrolytes" class="prod-photo" style="height:78%;filter:drop-shadow(0 8px 18px rgba(0,0,0,.4));">
           <div style="font-size:28px;opacity:.6;">💧</div>
         </div></div>
         <div class="p-5">
@@ -939,9 +756,9 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
       <div class="bun-card fade-up">
         <div class="p-4">
           <div class="flex items-center justify-center gap-2 mb-4" style="height:80px;">
-            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#7B4A2D,#3D1F0A);"><span class="pouch-label">SLIM<br>COFFEE</span></div>
+            <img src="assets/products/slim-coffee.png" alt="Tropical Slim Coffee" class="prod-photo" style="height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));">
             <span class="text-text-muted text-lg font-light">+</span>
-            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#1E5A7A,#0A3050);"><span class="pouch-label" style="font-size:5.5px;">HYDRATION<br>COFFEE</span></div>
+            <img src="assets/products/hydration-coffee.png" alt="Tropical Hydration Coffee" class="prod-photo" style="height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));">
           </div>
           <div class="inline-flex items-center rounded-full px-2.5 py-1 mb-2" style="background:#FDF0E0;color:#C47C2B;font-size:10px;font-weight:700;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Save 20%</div>
           <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Weight Support Bundle</h4>
@@ -954,9 +771,9 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
       <div class="bun-card fade-up d1">
         <div class="p-4">
           <div class="flex items-center justify-center gap-2 mb-4" style="height:80px;">
-            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#8B3060,#5C1A3A);"><span class="pouch-label">BEAUTY<br>COFFEE</span></div>
+            <img src="assets/products/beauty-coffee.png" alt="Tropical Beauty Coffee" class="prod-photo" style="height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));">
             <span class="text-text-muted text-lg font-light">+</span>
-            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#5A4070,#2A1840);"><span class="pouch-label">ORGANIC<br>ACAI</span></div>
+            <img src="assets/products/organic-acai.png" alt="Tropical Organic Acai" class="prod-photo" style="height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));">
           </div>
           <div class="inline-flex items-center rounded-full px-2.5 py-1 mb-2" style="background:#FDE8F5;color:#8B3060;font-size:10px;font-weight:700;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Save 20%</div>
           <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Beauty Glow Bundle</h4>
@@ -969,9 +786,9 @@ h1,h2,h3,h4{font-family:'Lora',serif;}
       <div class="bun-card fade-up d2">
         <div class="p-4">
           <div class="flex items-center justify-center gap-2 mb-4" style="height:80px;">
-            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#3D7030,#1E4010);"><span class="pouch-label">MUSHROOM<br>MATCHA</span></div>
+            <img src="assets/products/mushroom-matcha.png" alt="Tropical Mushroom Matcha" class="prod-photo" style="height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));">
             <span class="text-text-muted text-lg font-light">+</span>
-            <div class="pouch" style="width:44px;height:60px;background:linear-gradient(160deg,#506A20,#304010);"><span class="pouch-label">ORGANIC<br>MORINGA</span></div>
+            <img src="assets/products/organic-moringa.png" alt="Tropical Organic Moringa" class="prod-photo" style="height:74px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));">
           </div>
           <div class="inline-flex items-center rounded-full px-2.5 py-1 mb-2" style="background:#E8F5E0;color:#2D5A3D;font-size:10px;font-weight:700;font-family:'Raleway',sans-serif;letter-spacing:.06em;text-transform:uppercase;">Save 20%</div>
           <h4 class="font-serif font-semibold text-text-dark text-base mb-1">Energy &amp; Focus Bundle</h4>
